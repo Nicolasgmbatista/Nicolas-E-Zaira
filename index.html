@@ -101,6 +101,40 @@
       color: #ff6b9d;
     }
 
+    /* ESPAÇO PARA TEXTO PERSONALIZADO */
+    .love-note {
+      margin: 30px auto;
+      max-width: 600px;
+      padding: 25px;
+      background: linear-gradient(135deg, rgba(106, 27, 154, 0.4), rgba(156, 39, 176, 0.3));
+      border-radius: 20px;
+      border: 2px solid #ff6b9d;
+      color: #fff;
+      font-style: italic;
+      line-height: 1.8;
+      font-size: 1.1rem;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(255, 107, 157, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+    .love-note::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: radial-gradient(circle at 50% 50%, rgba(255, 107, 157, 0.1), transparent 70%);
+      pointer-events: none;
+    }
+    .love-note strong {
+      display: block;
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.6rem;
+      color: #ff6b9d;
+      margin-bottom: 12px;
+      text-shadow: 0 0 8px rgba(255, 107, 157, 0.6);
+    }
+
     /* CARTA DIÁRIA */
     .daily-letter {
       margin: 30px auto;
@@ -349,41 +383,7 @@
       font-size: 1rem;
     }
 
-    /* ESPAÇO PARA TEXTO PERSONALIZADO */
-    .love-note {
-      margin: 30px auto;
-      max-width: 600px;
-      padding: 25px;
-      background: linear-gradient(135deg, rgba(106, 27, 154, 0.4), rgba(156, 39, 176, 0.3));
-      border-radius: 20px;
-      border: 2px solid #ff6b9d;
-      color: #fff;
-      font-style: italic;
-      line-height: 1.8;
-      font-size: 1.1rem;
-      text-align: center;
-      box-shadow: 0 10px 25px rgba(255, 107, 157, 0.3);
-      position: relative;
-      overflow: hidden;
-    }
-    .love-note::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: radial-gradient(circle at 50% 50%, rgba(255, 107, 157, 0.1), transparent 70%);
-      pointer-events: none;
-    }
-    .love-note strong {
-      display: block;
-      font-family: 'Dancing Script', cursive;
-      font-size: 1.6rem;
-      color: #ff6b9d;
-      margin-bottom: 12px;
-      text-shadow: 0 0 8px rgba(255, 107, 157, 0.6);
-    }
-
-    /* CORAÇÕES FLUTUANTES — GRANDES, SUAVES E SEM ROTAÇÃO */
+    /* CORAÇÕES FLUTUANTES */
     .floating-hearts { 
       position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
       pointer-events: none; overflow: hidden; z-index: 1; 
@@ -449,7 +449,6 @@
   <div class="floating-hearts" id="hearts"></div>
 
   <div class="container">
-    <!-- LOGO REMOVIDA DO CONTEÚDO -->
 
     <h1>Para Zaira, Meu Amor</h1>
     <p>Você é meu universo inteiro.</p>
@@ -480,6 +479,21 @@
       </div>
     </div>
 
+    <!-- TEXTO PERSONALIZADO (AGORA ACIMA DA CARTA) -->
+    <div class="love-note">
+      <strong>Minha Gatinha,</strong>
+      <p>
+        Há amores que não precisam de grandes palavras, porque vivem nos detalhes:
+        em um toque leve, em um sorriso espontâneo, em um olhar que diz “fica”.
+        São amores que amadurecem com o tempo e se fortalecem nas imperfeições.
+        Não exigem, apenas cuidam; não cobram, apenas sentem.
+        E quando o destino une duas almas com essa mesma delicadeza, o mundo parece mais bonito.
+        Porque não é sobre encontrar alguém perfeito — é sobre encontrar alguém que faz o simples parecer extraordinário.
+      </p>
+      <br>
+      <em>Com todo o meu amor, seu futuro esposo.</em>
+    </div>
+
     <!-- CARTA DIÁRIA -->
     <div class="daily-letter" id="dailyLetter">
       <strong>Clique para abrir sua carta de hoje amor!</strong>
@@ -503,21 +517,6 @@
       </div>
       <div class="music-icon" id="musicToggle">Play</div>
       <span class="music-title">A Thousand Years – Christina Perri</span>
-    </div>
-
-    <!-- ESPAÇO PARA TEXTO PERSONALIZADO -->
-    <div class="love-note">
-      <strong>Minha Gatinha,</strong>
-      <p>
-        Há amores que não precisam de grandes palavras, porque vivem nos detalhes:
-em um toque leve, em um sorriso espontâneo, em um olhar que diz “fica”.
-São amores que amadurecem com o tempo e se fortalecem nas imperfeições.
-Não exigem, apenas cuidam; não cobram, apenas sentem.
-E quando o destino une duas almas com essa mesma delicadeza, o mundo parece mais bonito.
-Porque não é sobre encontrar alguém perfeito — é sobre encontrar alguém que faz o simples parecer extraordinário.
-      </p>
-      <br>
-      <em>Com todo o meu amor, seu futuro esposo.</em>
     </div>
 
     <button class="confetti-btn" id="confettiBtn">Toca aqui!</button>
@@ -573,7 +572,7 @@ Porque não é sobre encontrar alguém perfeito — é sobre encontrar alguém q
       }
     });
 
-    // CHUVA DE CORAÇÕES — SUAVE, GRANDE, SEM ROTAÇÃO
+    // CHUVA DE CORAÇÕES
     const heartsContainer = document.getElementById('hearts');
     const sizes = ['2.2rem', '2.6rem', '3.0rem', '3.4rem', '3.8rem'];
 
