@@ -232,6 +232,33 @@
       display: flex; align-items: center; justify-content: center;
       color: white; font-size: 1.6rem; font-weight: bold;
     }
+
+    /* BOTÃO DE MÚSICA */
+    .music-control {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(106, 27, 154, 0.7);
+      color: #ff6b9d;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+      transition: 0.3s;
+      z-index: 1000;
+      backdrop-filter: blur(5px);
+      border: 2px solid #9c27b0;
+    }
+    .music-control:hover {
+      transform: scale(1.1);
+      background: rgba(106, 27, 154, 0.9);
+    }
+
     .floating-hearts { 
       position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
       pointer-events: none; overflow: hidden; z-index: 1; 
@@ -257,12 +284,16 @@
       .countdown-container { gap: 15px; }
       .countdown-box { min-width: 110px; padding: 15px 10px; }
       .gominha-container .time { font-size: 1.4rem; }
+      .music-control { width: 45px; height: 45px; font-size: 1.5rem; bottom: 15px; right: 15px; }
     }
   </style>
 </head>
 <body>
 
   <div class="play-overlay" id="playOverlay">Toque para ouvir nossa música</div>
+
+  <!-- BOTÃO DE CONTROLE DE MÚSICA -->
+  <div class="music-control" id="musicToggle">Play</div>
 
   <div class="floating-hearts" id="hearts"></div>
 
@@ -326,12 +357,28 @@
   </audio>
 
   <script>
-    // AUTOPLAY
+    // AUTOPLAY + CONTROLE DE MÚSICA
     const overlay = document.getElementById('playOverlay');
     const music = document.getElementById('bgMusic');
+    const musicToggle = document.getElementById('musicToggle');
+    let isPlaying = false;
+
     overlay.addEventListener('click', () => {
       music.play().catch(() => {});
       overlay.style.display = 'none';
+      isPlaying = true;
+      musicToggle.innerHTML = 'Pause';
+    });
+
+    musicToggle.addEventListener('click', () => {
+      if (isPlaying) {
+        music.pause();
+        musicToggle.innerHTML = 'Play';
+      } else {
+        music.play().catch(() => {});
+        musicToggle.innerHTML = 'Pause';
+      }
+      isPlaying = !isPlaying;
     });
 
     // SLIDESHOW (6 FOTOS)
@@ -387,7 +434,6 @@
       "Te amo além das palavras.",
       "Você é meu para sempre.",
       "Seu toque é magia pura.",
-      // ADICIONE AS DEMAIS FRASES AQUI (até 365)
     ];
 
     // CARTA DIÁRIA
@@ -405,7 +451,7 @@
       }
     });
 
-    // VALE GOMINHA! (DIA 15) — CRONÔMETRO SEMPRE VISÍVEL
+    // VALE GOMINHA! (DIA 15)
     const gominhaBox = document.getElementById('gominhaBox');
     const gominhaCountdown = document.getElementById('gominhaCountdown');
     const readyText = document.getElementById('readyText');
@@ -478,7 +524,6 @@
       isRedeemed = false;
     }
 
-    // INICIA SEMPRE COM CRONÔMETRO
     updateGominha();
 
     // CONFETE
