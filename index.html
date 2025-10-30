@@ -1,1 +1,274 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Para Você, Meu Amor</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ffeef8, #f8d7e9);
+      color: #5a3a5e;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      overflow-x: hidden;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.92);
+      padding: 40px 30px;
+      border-radius: 25px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+      max-width: 800px;
+      width: 100%;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 3.5rem;
+      color: #d63384;
+      margin-bottom: 15px;
+    }
+
+    p {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      margin: 15px 0;
+      color: #6b4e71;
+    }
+
+    .countdown-container {
+      margin: 35px 0;
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      flex-wrap: wrap;
+    }
+
+    .countdown-box {
+      background: #fdf2f8;
+      padding: 20px 15px;
+      border-radius: 15px;
+      width: 145px;
+      box-shadow: 0 5px 15px rgba(214, 51, 132, 0.2);
+      transition: transform 0.3s;
+    }
+
+    .countdown-box:hover { transform: translateY(-5px); }
+
+    .countdown-box h3 {
+      font-size: 0.9rem;
+      color: #d63384;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .countdown-box .time {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #9f3a78;
+      line-height: 1.2;
+    }
+
+    .countdown-box .time small {
+      font-size: 0.7rem;
+      font-weight: normal;
+      opacity: 0.8;
+    }
+
+    .heart { color: #ff6b9d; font-size: 1.5rem; animation: pulse 1.5s infinite; }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+
+    .footer {
+      margin-top: 30px;
+      font-size: 0.9rem;
+      color: #b08bb3;
+    }
+
+    /* Galeria de Imagens */
+    .gallery {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin: 30px 0;
+      flex-wrap: wrap;
+    }
+
+    .gallery img {
+      width: 180px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 18px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      transition: transform 0.4s, box-shadow 0.4s;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.08);
+      box-shadow: 0 12px 25px rgba(214, 51, 132, 0.3);
+    }
+
+    /* Corações flutuantes */
+    .floating-hearts {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none; overflow: hidden; z-index: -1;
+    }
+
+    .heart-float {
+      position: absolute;
+      color: rgba(255, 107, 157, 0.3);
+      font-size: 1.5rem;
+      animation: float 6s infinite ease-in-out;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0) rotate(0deg); opacity: 0.7; }
+      100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* Botão de música */
+    .music-btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #ff6b9d;
+      color: white;
+      border: none;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .music-btn:hover {
+      background: #d63384;
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 2.5rem; }
+      .countdown-box { width: 110px; padding: 15px 10px; }
+      .countdown-box .time { font-size: 1.5rem; }
+      .gallery img { width: 140px; height: 140px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="floating-hearts" id="hearts"></div>
+
+  <div class="container">
+    <h1>Para Você, Meu Amor</h1>
+    <p>Você é o motivo do meu sorriso todos os dias. 💕</p>
+    <p>Te amo mais do que ontem, e menos do que amanhã.</p>
+
+    <!-- Galeria de Imagens -->
+    <div class="gallery">
+      <img src="imagem/se_admiramos.jpg" alt="Se admiramos">
+      <img src="imagem/se_amamos.jpg" alt="Se amamos">
+      <img src="imagem/se_desejamos.jpg" alt="Se desejamos">
+    </div>
+
+    <!-- Contadores -->
+    <div class="countdown-container">
+      <div class="countdown-box">
+        <h3>Seu Aniversário</h3>
+        <div class="time" id="birthdayCountdown">--</div>
+      </div>
+      <div class="countdown-box">
+        <h3>Nosso Aniversário</h3>
+        <div class="time" id="anniversaryCountdown">--</div>
+      </div>
+    </div>
+
+    <p><span class="heart">♡</span> 01/01 é o seu dia. <br> 15/05 é o nosso. <span class="heart">♡</span></p>
+
+    <!-- Botão de música -->
+    <button class="music-btn" id="playBtn">Tocar Música</button>
+
+    <div class="footer">
+      Feito com todo o amor do mundo por você ❤️
+    </div>
+  </div>
+
+  <!-- Áudio -->
+  <audio id="bgMusic" loop>
+    <source src="som/Christina Perri - A Thousand Years [Official Music Video].mp3" type="audio/mp3">
+    Seu navegador não suporta áudio.
+  </audio>
+
+  <script>
+    // === CONTADORES ===
+    function startCountdown(targetDateStr, elementId) {
+      const targetDate = new Date(targetDateStr);
+      
+      function update() {
+        const now = new Date();
+        let nextDate = new Date(targetDate);
+        if (now > nextDate) nextDate.setFullYear(nextDate.getFullYear() + 1);
+
+        const diff = nextDate - now;
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        document.getElementById(elementId).innerHTML = 
+          `${days}<small>d</small> ${hours}<small>h</small> ${minutes}<small>m</small> ${seconds}<small>s</small>`;
+
+        setTimeout(update, 1000);
+      }
+      update();
+    }
+
+    startCountdown("2026-01-01T00:00:00", "birthdayCountdown");
+    startCountdown("2026-05-15T00:00:00", "anniversaryCountdown");
+
+    // === MÚSICA ===
+    const music = document.getElementById('bgMusic');
+    const playBtn = document.getElementById('playBtn');
+    let isPlaying = false;
+
+    playBtn.addEventListener('click', () => {
+      if (isPlaying) {
+        music.pause();
+        playBtn.textContent = "Tocar Música";
+      } else {
+        music.play();
+        playBtn.textContent = "Pausar Música";
+      }
+      isPlaying = !isPlaying;
+    });
+
+    // === CORAÇÕES FLUTUANTES ===
+    const heartsContainer = document.getElementById('hearts');
+    const hearts = ['♡', '💕', '❤️', '💖', '💗'];
+
+    setInterval(() => {
+      const heart = document.createElement('div');
+      heart.classList.add('heart-float');
+      heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+      heartsContainer.appendChild(heart);
+      setTimeout(() => heart.remove(), 7000);
+    }, 800);
+  </script>
+
+</body>
+</html>
