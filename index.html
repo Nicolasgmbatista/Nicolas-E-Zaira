@@ -7,197 +7,224 @@
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #1a0b2e, #2d1b3a);
-    color: #e0c3fc;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    overflow-x: hidden;
-    position: relative;
-  }
-  .container {
-    background: rgba(20, 10, 40, 0.95);
-    padding: 40px 30px;
-    border-radius: 20px;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.6);
-    max-width: 900px;
-    width: 100%;
-    text-align: center;
-    position: relative;
-    z-index: 2;
-    border: 1px solid #6a1b9a;
-  }
-  h1 {
-    font-family: 'Dancing Script', cursive;
-    font-size: 4rem;
-    color: #ff6b9d;
-    margin-bottom: 15px;
-    text-shadow: 0 0 15px rgba(255, 107, 157, 0.5);
-    animation: glow 2s infinite alternate;
-  }
-  @keyframes glow {
-    from { text-shadow: 0 0 15px rgba(255, 107, 157, 0.5); }
-    to { text-shadow: 0 0 25px rgba(255, 107, 157, 0.8); }
-  }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #1a0b2e, #2d1b3a);
+      color: #e0c3fc;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      overflow-x: hidden;
+      position: relative;
+    }
+    .container {
+      background: rgba(20, 10, 40, 0.95);
+      padding: 40px 30px;
+      border-radius: 20px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+      max-width: 900px;
+      width: 100%;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+      border: 1px solid #6a1b9a;
+    }
+    h1 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 4rem;
+      color: #ff6b9d;
+      margin-bottom: 15px;
+      text-shadow: 0 0 15px rgba(255, 107, 157, 0.5);
+      animation: glow 2s infinite alternate;
+    }
+    @keyframes glow {
+      from { text-shadow: 0 0 15px rgba(255, 107, 157, 0.5); }
+      to { text-shadow: 0 0 25px rgba(255, 107, 157, 0.8); }
+    }
 
-  /* SLIDESHOW CORRIGIDO: FOTOS INTEIRAS */
-  .slideshow {
-    position: relative;
-    width: 100%;
-    max-width: 600px;
-    margin: 30px auto;
-    height: 450px; /* Aumentado para caber fotos grandes */
-    overflow: hidden;
-    border-radius: 18px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    background: #000; /* Fundo preto para consistência */
-  }
-  .slide {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    opacity: 0;
-    transition: opacity 1s ease;
-  }
-  .slide.active { opacity: 1; }
-  .slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain; /* MOSTRA A FOTO INTEIRA */
-    background: #000;
-    border-radius: 18px;
-    cursor: zoom-in;
-  }
+    .slideshow {
+      position: relative;
+      width: 100%;
+      max-width: 600px;
+      margin: 30px auto;
+      height: 450px;
+      overflow: hidden;
+      border-radius: 18px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      background: #000;
+    }
+    .slide {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+    .slide.active { opacity: 1; }
+    .slide img {
+      width: 100%; height: 100%; object-fit: contain;
+      background: #000; border-radius: 18px; cursor: zoom-in;
+    }
 
-  /* CONTADORES EM LINHA */
-  .countdown-container {
-    display: flex;
-    justify-content: center;
-    gap: 25px;
-    margin: 35px 0;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-  }
-  .countdown-box {
-    background: rgba(106, 27, 154, 0.3);
-    padding: 18px 15px;
-    border-radius: 15px;
-    min-width: 130px;
-    backdrop-filter: blur(5px);
-    border: 1px solid #9c27b0;
-  }
-  .countdown-box h3 {
-    font-size: 0.9rem;
-    color: #ff8a65;
-    margin-bottom: 8px;
-  }
-  .countdown-box .time {
-    font-size: 1.6rem;
-    font-weight: bold;
-    color: #ff6b9d;
-  }
+    .countdown-container {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      margin: 35px 0;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+    }
+    .countdown-box {
+      background: rgba(106, 27, 154, 0.3);
+      padding: 18px 15px;
+      border-radius: 15px;
+      min-width: 130px;
+      backdrop-filter: blur(5px);
+      border: 1px solid #9c27b0;
+    }
+    .countdown-box h3 {
+      font-size: 0.9rem;
+      color: #ff8a65;
+      margin-bottom: 8px;
+    }
+    .countdown-box .time {
+      font-size: 1.6rem;
+      font-weight: bold;
+      color: #ff6b9d;
+    }
 
-  /* CARTA SECRETA */
-  .daily-letter {
-    margin: 30px auto;
-    max-width: 600px;
-    padding: 20px;
-    background: rgba(106, 27, 154, 0.2);
-    border-radius: 15px;
-    border: 1px dashed #9c27b0;
-    color: #e0c3fc;
-    font-style: italic;
-    line-height: 1.7;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-  .daily-letter:hover {
-    background: rgba(106, 27, 154, 0.4);
-    transform: translateY(-3px);
-  }
+    .daily-letter {
+      margin: 30px auto;
+      max-width: 600px;
+      padding: 20px;
+      background: rgba(106, 27, 154, 0.2);
+      border-radius: 15px;
+      border: 1px dashed #9c27b0;
+      color: #e0c3fc;
+      font-style: italic;
+      line-height: 1.7;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .daily-letter:hover {
+      background: rgba(106, 27, 154, 0.4);
+      transform: translateY(-3px);
+    }
 
-  /* BOTÃO CONFETE */
-  .confetti-btn {
-    margin: 25px auto;
-    padding: 12px 30px;
-    background: linear-gradient(45deg, #ff6b9d, #d63384);
-    color: white;
-    border: none;
-    border-radius: 50px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: 0.3s;
-    box-shadow: 0 5px 15px rgba(214, 51, 132, 0.4);
-  }
-  .confetti-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 20px rgba(214, 51, 132, 0.6);
-  }
+    /* VALE GOMINHA! */
+    .gominha-container {
+      margin: 30px auto;
+      max-width: 600px;
+      padding: 20px;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      border-radius: 18px;
+      border: 3px dashed #ff6b9d;
+      color: #1a0b2e;
+      font-weight: bold;
+      text-align: center;
+      cursor: pointer;
+      transition: 0.4s;
+      box-shadow: 0 8px 20px rgba(255, 107, 157, 0.3);
+    }
+    .gominha-container:hover {
+      transform: scale(1.03);
+      box-shadow: 0 12px 30px rgba(255, 107, 157, 0.5);
+    }
+    .gominha-container.locked {
+      background: rgba(106, 27, 154, 0.3);
+      border: 2px dashed #9c27b0;
+      color: #e0c3fc;
+      cursor: not-allowed;
+    }
+    .gominha-container .lock-icon {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+    .gominha-container .ticket {
+      font-size: 1.5rem;
+      font-family: 'Dancing Script', cursive;
+      color: #d63384;
+      display: none;
+    }
 
-  /* MODAL ZOOM */
-  .modal {
-    display: none;
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.9);
-    z-index: 9999;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-  }
-  .modal img {
-    max-width: 90%;
-    max-height: 90%;
-    border-radius: 15px;
-    box-shadow: 0 0 30px rgba(255, 107, 157, 0.5);
-  }
-  .close {
-    position: absolute;
-    top: 20px; right: 30px;
-    color: white;
-    font-size: 2rem;
-    cursor: pointer;
-  }
+    .confetti-btn {
+      margin: 25px auto;
+      padding: 12px 30px;
+      background: linear-gradient(45deg, #ff6b9d, #d63384);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 5px 15px rgba(214, 51, 132, 0.4);
+    }
+    .confetti-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(214, 51, 132, 0.6);
+    }
 
-  .play-overlay {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.7); z-index: 9999; cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    color: white; font-size: 1.6rem; font-weight: bold;
-  }
-  .floating-hearts { 
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
-    pointer-events: none; overflow: hidden; z-index: 1; 
-  }
-  .heart-float { 
-    position: absolute; color: rgba(255, 107, 157, 0.2); font-size: 1.5rem; 
-    animation: float 8s infinite ease-in-out; 
-  }
-  @keyframes float { 
-    0% { transform: translateY(0) rotate(0deg); opacity: 0.7; } 
-    100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; } 
-  }
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.9);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 15px;
+      box-shadow: 0 0 30px rgba(255, 107, 157, 0.5);
+    }
+    .close {
+      position: absolute;
+      top: 20px; right: 30px;
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+    }
 
-  .footer {
-    margin-top: 30px;
-    font-size: 0.9rem;
-    color: #b39ddb;
-  }
+    .play-overlay {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.7); z-index: 9999; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-size: 1.6rem; font-weight: bold;
+    }
+    .floating-hearts { 
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+      pointer-events: none; overflow: hidden; z-index: 1; 
+    }
+    .heart-float { 
+      position: absolute; color: rgba(255, 107, 157, 0.2); font-size: 1.5rem; 
+      animation: float 8s infinite ease-in-out; 
+    }
+    @keyframes float { 
+      0% { transform: translateY(0) rotate(0deg); opacity: 0.7; } 
+      100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; } 
+    }
 
-  @media (max-width: 600px) {
-    h1 { font-size: 2.8rem; }
-    .slideshow { height: 300px; }
-    .countdown-container { gap: 15px; }
-    .countdown-box { min-width: 110px; padding: 15px 10px; }
-  }
-</style>
+    .footer {
+      margin-top: 30px;
+      font-size: 0.9rem;
+      color: #b39ddb;
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 2.8rem; }
+      .slideshow { height: 300px; }
+      .countdown-container { gap: 15px; }
+      .countdown-box { min-width: 110px; padding: 15px 10px; }
+    }
+  </style>
 </head>
 <body>
 
@@ -234,6 +261,13 @@
     <div class="daily-letter" id="dailyLetter">
       <strong>Clique para abrir sua carta de hoje</strong>
       <p id="loveMessage" style="display:none; margin-top:15px; font-size:1.1rem; color:#ff8a65;"></p>
+    </div>
+
+    <!-- VALE GOMINHA! -->
+    <div class="gominha-container" id="gominhaBox">
+      <div class="lock-icon">Lock</div>
+      <div class="time" id="gominhaCountdown">--</div>
+      <div class="ticket" id="gominhaTicket">Vale Gominha!</div>
     </div>
 
     <button class="confetti-btn" id="confettiBtn">Te amo, Zaira!</button>
@@ -300,7 +334,7 @@
     startCountdown("2026-05-15T00:00:00", "anniversaryCountdown");
     startCountdown("2023-05-15T00:00:00", "togetherCountdown", true);
 
-    // 365 FRASES ROMÂNTICAS (COMPLETAS)
+    // 10 FRASES INICIAIS (você cola as outras depois)
     const loveMessages = [
       "Seu sorriso ilumina até os dias mais escuros.",
       "Você é a razão do meu coração bater mais forte.",
@@ -312,474 +346,7 @@
       "Te amo além das palavras.",
       "Você é meu para sempre.",
       "Seu toque é magia pura.",
-      "Você é meu sol em dias nublados.",
-      "Seu cheiro me faz sentir em casa.",
-      "Você é a música da minha vida.",
-      "Te amo mais que chocolate.",
-      "Você é meu maior orgulho.",
-      "Seu beijo é meu vício.",
-      "Você é minha melhor versão.",
-      "Te amo até a lua e de volta.",
-      "Você é meu destino.",
-      "Seu riso é minha melodia.",
-      "Você é minha inspiração diária.",
-      "Te amo em silêncio e em gritos.",
-      "Você é meu lar.",
-      "Seu amor me cura.",
-      "Você é minha sorte grande.",
-      "Te amo com todos os meus átomos.",
-      "Você é meu refúgio.",
-      "Seu olhar é poesia.",
-      "Você é minha eternidade.",
-      "Te amo mais que ontem.",
-      "Você é meu motivo pra sorrir.",
-      "Seu abraço é meu escudo.",
-      "Você é minha alma gêmea.",
-      "Te amo em todas as línguas.",
-      "Você é meu céu estrelado.",
-      "Seu toque me acalma.",
-      "Você é meu presente.",
-      "Te amo sem fim.",
-      "Você é minha luz.",
-      "Seu sorriso é meu remédio.",
-      "Você é meu tudo.",
-      "Te amo com o coração inteiro.",
-      "Você é minha vida.",
-      "Seu beijo é meu paraíso.",
-      "Você é meu amor verdadeiro.",
-      "Te amo por ser você.",
-      "Você é minha felicidade.",
-      "Seu olhar me completa.",
-      "Você é meu mundo.",
-      "Te amo para sempre.",
-      "Você é meu coração batendo fora do peito.",
-      "Seu amor é meu ar.",
-      "Você é minha estrela guia.",
-      "Te amo mais que tudo.",
-      "Você é meu sonho acordado.",
-      "Seu sorriso é meu sol.",
-      "Você é minha paz.",
-      "Te amo com a alma.",
-      "Você é meu destino certo.",
-      "Seu toque é fogo.",
-      "Você é minha sorte.",
-      "Te amo além da razão.",
-      "Você é meu porto seguro.",
-      "Seu olhar é meu lar.",
-      "Você é meu amor eterno.",
-      "Te amo com cada batida.",
-      "Você é minha vida inteira.",
-      "Seu abraço é meu céu.",
-      "Você é meu futuro.",
-      "Te amo sem medidas.",
-      "Você é minha poesia.",
-      "Seu beijo é minha música.",
-      "Você é meu sempre.",
-      "Te amo com o universo inteiro.",
-      "Você é minha verdade.",
-      "Seu sorriso é minha força.",
-      "Você é meu amor real.",
-      "Te amo em todos os tempos.",
-      "Você é minha essência.",
-      "Seu toque é minha cura.",
-      "Você é meu começo e fim.",
-      "Te amo com cada fibra.",
-      "Você é minha luz no escuro.",
-      "Seu olhar é meu norte.",
-      "Você é meu amor infinito.",
-      "Te amo com o coração aberto.",
-      "Você é minha alma.",
-      "Seu abraço é meu mundo.",
-      "Você é meu para sempre.",
-      "Te amo além do infinito.",
-      "Você é minha estrela.",
-      "Seu sorriso é meu dia.",
-      "Você é meu amor puro.",
-      "Te amo com cada suspiro.",
-      "Você é minha razão.",
-      "Seu beijo é meu vício doce.",
-      "Você é meu amor maior.",
-      "Te amo com cada olhar.",
-      "Você é minha felicidade plena.",
-      "Seu toque é minha paz.",
-      "Você é meu amor verdadeiro.",
-      "Te amo com a vida.",
-      "Você é meu coração.",
-      "Seu sorriso é meu céu.",
-      "Você é meu amor eterno.",
-      "Te amo com tudo que sou.",
-      "Você é minha alma gêmea.",
-      "Seu abraço é meu lar.",
-      "Você é meu destino.",
-      "Te amo para sempre.",
-      "Você é minha luz.",
-      "Seu olhar é meu tudo.",
-      "Você é meu amor real.",
-      "Te amo com o universo.",
-      "Você é minha estrela guia.",
-      "Seu toque é meu paraíso.",
-      "Você é meu amor infinito.",
-      "Te amo com cada batida.",
-      "Você é minha vida.",
-      "Seu sorriso é meu sol.",
-      "Você é meu para sempre.",
-      "Te amo além das palavras.",
-      "Você é meu coração.",
-      "Seu beijo é minha música.",
-      "Você é meu amor eterno.",
-      "Te amo com a alma.",
-      "Você é minha paz.",
-      "Seu olhar é poesia.",
-      "Você é meu tudo.",
-      "Te amo com cada suspiro.",
-      "Você é minha felicidade.",
-      "Seu abraço é meu escudo.",
-      "Você é meu amor verdadeiro.",
-      "Te amo com o coração inteiro.",
-      "Você é minha estrela.",
-      "Seu sorriso é meu remédio.",
-      "Você é meu mundo.",
-      "Te amo sem fim.",
-      "Você é minha luz.",
-      "Seu toque é magia.",
-      "Você é meu para sempre.",
-      "Te amo mais que tudo.",
-      "Você é minha sorte.",
-      "Seu beijo é meu vício.",
-      "Você é meu amor real.",
-      "Te amo com cada fibra.",
-      "Você é minha alma.",
-      "Seu olhar é meu lar.",
-      "Você é meu destino.",
-      "Te amo com a vida.",
-      "Você é meu coração batendo.",
-      "Seu sorriso é meu dia.",
-      "Você é meu amor puro.",
-      "Te amo com cada olhar.",
-      "Você é minha felicidade plena.",
-      "Seu toque é minha paz.",
-      "Você é meu amor maior.",
-      "Te amo com tudo que sou.",
-      "Você é minha estrela guia.",
-      "Seu abraço é meu céu.",
-      "Você é meu futuro.",
-      "Te amo sem medidas.",
-      "Você é minha poesia.",
-      "Seu beijo é minha música.",
-      "Você é meu sempre.",
-      "Te amo com o universo inteiro.",
-      "Você é minha verdade.",
-      "Seu sorriso é minha força.",
-      "Você é meu amor real.",
-      "Te amo em todos os tempos.",
-      "Você é minha essência.",
-      "Seu toque é minha cura.",
-      "Você é meu começo e fim.",
-      "Te amo com cada fibra.",
-      "Você é minha luz no escuro.",
-      "Seu olhar é meu norte.",
-      "Você é meu amor infinito.",
-      "Te amo com o coração aberto.",
-      "Você é minha alma.",
-      "Seu abraço é meu mundo.",
-      "Você é meu para sempre.",
-      "Te amo além do infinito.",
-      "Você é minha estrela.",
-      "Seu sorriso é meu dia.",
-      "Você é meu amor puro.",
-      "Te amo com cada suspiro.",
-      "Você é minha razão.",
-      "Seu beijo é meu vício doce.",
-      "Você é meu amor maior.",
-      "Te amo com cada olhar.",
-      "Você é minha felicidade plena.",
-      "Seu toque é minha paz.",
-      "Você é meu amor verdadeiro.",
-      "Te amo com a vida.",
-      "Você é meu coração.",
-      "Seu sorriso é meu céu.",
-      "Você é meu amor eterno.",
-      "Te amo com tudo que sou.",
-      "Você é minha alma gêmea.",
-      "Seu abraço é meu lar.",
-      "Você é meu destino.",
-      "Te amo para sempre.",
-      "Você é minha luz.",
-      "Seu olhar é meu tudo.",
-      "Você é meu amor real.",
-      "Te amo com o universo.",
-      "Você é minha estrela guia.",
-      "Seu toque é meu paraíso.",
-      "Você é meu amor infinito.",
-      "Te amo com cada batida.",
-      "Você é minha vida.",
-      "Seu sorriso é meu sol.",
-      "Você é meu para sempre.",
-      "Te amo além das palavras.",
-      "Você é meu coração.",
-      "Seu beijo é minha música.",
-      "Você é meu amor eterno.",
-      "Te amo com a alma.",
-      "Você é minha paz.",
-      "Seu olhar é poesia.",
-      "Você é meu tudo.",
-      "Te amo com cada suspiro.",
-      "Você é minha felicidade.",
-      "Seu abraço é meu escudo.",
-      "Você é meu amor verdadeiro.",
-      "Te amo com o coração inteiro.",
-      "Você é minha estrela.",
-      "Seu sorriso é meu remédio.",
-      "Você é meu mundo.",
-      "Te amo sem fim.",
-      "Você é minha luz.",
-      "Seu toque é magia.",
-      "Você é meu para sempre.",
-      "Te amo mais que tudo.",
-      "Você é minha sorte.",
-      "Seu beijo é meu vício.",
-      "Você é meu amor real.",
-      "Te amo com cada fibra.",
-      "Você é minha alma.",
-      "Seu olhar é meu lar.",
-      "Você é meu destino.",
-      "Te amo com a vida.",
-      "Você é meu coração batendo.",
-      "Seu sorriso é meu dia.",
-      "Você é meu amor puro.",
-      "Te amo com cada olhar.",
-      "Você é minha felicidade plena.",
-      "Seu toque é minha paz.",
-      "Você é meu amor maior.",
-      "Te amo com tudo que sou.",
-      "Você é minha estrela guia.",
-      "Seu abraço é meu céu.",
-      "Você é meu futuro.",
-      "Te amo sem medidas.",
-      "Você é minha poesia.",
-      "Seu beijo é minha música.",
-      "Você é meu sempre.",
-      "Te amo com o universo inteiro.",
-      "Você é minha verdade.",
-      "Seu sorriso é minha força.",
-      "Você é meu amor real.",
-      "Te amo em todos os tempos.",
-      "Você é minha essência.",
-      "Seu toque é minha cura.",
-      "Você é meu começo e fim.",
-      "Te amo com cada fibra.",
-      "Você é minha luz no escuro.",
-      "Seu olhar é meu norte.",
-      "Você é meu amor infinito.",
-      "Te amo com o coração aberto.",
-      "Você é minha alma.",
-      "Seu abraço é meu mundo.",
-      "Você é meu para sempre.",
-      "Te amo além do infinito.",
-      "Você é minha estrela.",
-      "Seu sorriso é meu dia.",
-      "Você é meu amor puro.",
-      "Te amo com cada suspiro.",
-      "Você é minha razão.",
-      "Seu beijo é meu vício doce.",
-      "Você é meu amor maior.",
-      "Te amo com cada olhar.",
-      "Você é minha felicidade plena.",
-      "Seu toque é minha paz.",
-      "Você é meu amor verdadeiro.",
-      "Te amo com a vida.",
-      "Você é meu coração.",
-      "Seu sorriso é meu céu.",
-      "Você é meu amor eterno.",
-      "Te amo com tudo que sou.",
-      "Você é minha alma gêmea.",
-      "Seu abraço é meu lar.",
-      "Você é meu destino.",
-      "Te amo para sempre.",
-      "Você é minha luz.",
-      "Seu olhar é meu tudo.",
-      "Você é meu amor real.",
-      "Te amo com o universo.",
-      "Você é minha estrela guia.",
-      "Seu toque é meu paraíso.",
-      "Você é meu amor infinito.",
-      "Te amo com cada batida.",
-      "Você é minha vida.",
-      "Seu sorriso é meu sol.",
-      "Você é meu para sempre.",
-      "Te amo além das palavras.",
-      "Você é meu coração.",
-      "Seu beijo é minha música.",
-      "Você é meu amor eterno.",
-      "Te amo com a alma.",
-      "Você é minha paz.",
-      "Seu olhar é poesia.",
-      "Você é meu tudo.",
-      "Te amo com cada suspiro.",
-      "Você é minha felicidade.",
-      "Seu abraço é meu escudo.",
-      "Você é meu amor verdadeiro.",
-      "Te amo com o coração inteiro.",
-      "Você é minha estrela.",
-      "Seu sorriso é meu remédio.",
-      "Você é meu mundo.",
-      "Te amo sem fim.",
-      "Você é minha luz.",
-      "Seu toque é magia.",
-      "Você é meu para sempre.",
-      "Te amo mais que tudo.",
-      "Você é minha sorte.",
-      "Seu beijo é meu vício.",
-      "Você é meu amor real.",
-      "Te amo com cada fibra.",
-      "Você é minha alma.",
-      "Seu olhar é meu lar.",
-      "Você é meu destino.",
-      "Te amo com a vida.",
-      "Você é meu coração batendo.",
-      "Seu sorriso é meu dia.",
-      "Você é meu amor puro.",
-      "Te amo com cada olhar.",
-      "Você é minha felicidade plena.",
-      "Seu toque é minha paz.",
-      "Você é meu amor maior.",
-      "Te amo com tudo que sou.",
-      "Você é minha estrela guia.",
-      "Seu abraço é meu céu.",
-      "Você é meu futuro.",
-      "Te amo sem medidas.",
-      "Você é minha poesia.",
-      "Seu beijo é minha música.",
-      "Você é meu sempre.",
-      "Te amo com o universo inteiro.",
-      "Você é minha verdade.",
-      "Seu sorriso é minha força.",
-      "Você é meu amor real.",
-      "Te amo em todos os tempos.",
-      "Você é minha essência.",
-      "Seu toque é minha cura.",
-      "Você é meu começo e fim.",
-      "Te amo com cada fibra.",
-      "Você é minha luz no escuro.",
-      "Seu olhar é meu norte.",
-      "Você é meu amor infinito.",
-      "Te amo com o coração aberto.",
-      "Você é minha alma.",
-      "Seu abraço é meu mundo.",
-      "Você é meu para sempre.",
-      "Te amo além do infinito.",
-      "Você é minha estrela.",
-      "Seu sorriso é meu dia.",
-      "Você é meu amor puro.",
-      "Te amo com cada suspiro.",
-      "Você é minha razão.",
-      "Seu beijo é meu vício doce.",
-      "Você é meu amor maior.",
-      "Te amo com cada olhar.",
-      "Você é minha felicidade plena.",
-      "Seu toque é minha paz.",
-      "Você é meu amor verdadeiro.",
-      "Te amo com a vida.",
-      "Você é meu coração.",
-      "Seu sorriso é meu céu.",
-      "Você é meu amor eterno.",
-      "Te amo com tudo que sou.",
-      "Você é minha alma gêmea.",
-      "Seu abraço é meu lar.",
-      "Você é meu destino.",
-      "Te amo para sempre.",
-      "Você é minha luz.",
-      "Seu olhar é meu tudo.",
-      "Você é meu amor real.",
-      "Te amo com o universo.",
-      "Você é minha estrela guia.",
-      "Seu toque é meu paraíso.",
-      "Você é meu amor infinito.",
-      "Te amo com cada batida.",
-      "Você é minha vida.",
-      "Seu sorriso é meu sol.",
-      "Você é meu para sempre.",
-      "Te amo além das palavras.",
-      "Você é meu coração.",
-      "Seu beijo é minha música.",
-      "Você é meu amor eterno.",
-      "Te amo com a alma.",
-      "Você é minha paz.",
-      "Seu olhar é poesia.",
-      "Você é meu tudo.",
-      "Te amo com cada suspiro.",
-      "Você é minha felicidade.",
-      "Seu abraço é meu escudo.",
-      "Você é meu amor verdadeiro.",
-      "Te amo com o coração inteiro.",
-      "Você é minha estrela.",
-      "Seu sorriso é meu remédio.",
-      "Você é meu mundo.",
-      "Te amo sem fim.",
-      "Você é minha luz.",
-      "Seu toque é magia.",
-      "Você é meu para sempre.",
-      "Te amo mais que tudo.",
-      "Você é minha sorte.",
-      "Seu beijo é meu vício.",
-      "Você é meu amor real.",
-      "Te amo com cada fibra.",
-      "Você é minha alma.",
-      "Seu olhar é meu lar.",
-      "Você é meu destino.",
-      "Te amo com a vida.",
-      "Você é meu coração batendo.",
-      "Seu sorriso é meu dia.",
-      "Você é meu amor puro.",
-      "Te amo com cada olhar.",
-      "Você é minha felicidade plena.",
-      "Seu toque é minha paz.",
-      "Você é meu amor maior.",
-      "Te amo com tudo que sou.",
-      "Você é minha estrela guia.",
-      "Seu abraço é meu céu.",
-      "Você é meu futuro.",
-      "Te amo sem medidas.",
-      "Você é minha poesia.",
-      "Seu beijo é minha música.",
-      "Você é meu sempre.",
-      "Te amo com o universo inteiro.",
-      "Você é minha verdade.",
-      "Seu sorriso é minha força.",
-      "Você é meu amor real.",
-      "Te amo em todos os tempos.",
-      "Você é minha essência.",
-      "Seu toque é minha cura.",
-      "Você é meu começo e fim.",
-      "Te amo com cada fibra.",
-      "Você é minha luz no escuro.",
-      "Seu olhar é meu norte.",
-      "Você é meu amor infinito.",
-      "Te amo com o coração aberto.",
-      "Você é minha alma.",
-      "Seu abraço é meu mundo.",
-      "Você é meu para sempre.",
-      "Te amo além do infinito.",
-      "Você é minha estrela.",
-      "Seu sorriso é meu dia.",
-      "Você é meu amor puro.",
-      "Te amo com cada suspiro.",
-      "Você é minha razão.",
-      "Seu beijo é meu vício doce.",
-      "Você é meu amor maior.",
-      "Te amo com cada olhar.",
-      "Você é minha felicidade plena.",
-      "Seu toque é minha paz.",
-      "Você é meu amor verdadeiro.",
-      "Te amo com a vida.",
-      "Você é meu coração.",
-      "Seu sorriso é meu céu.",
-      "Você é meu amor eterno.",
-      "Te amo com tudo que sou.",
-      "Você é minha alma gêmea.",
-      "Seu abraço é meu lar.",
-      "Você é meu destino.",
-      "Te amo para sempre."
+      // ADICIONE AS DEMAIS FRASES AQUI (até 365)
     ];
 
     // CARTA DIÁRIA
@@ -790,12 +357,64 @@
 
     letter.addEventListener('click', () => {
       if (!shown) {
-        message.textContent = loveMessages[today % 365];
+        message.textContent = loveMessages[today % loveMessages.length];
         message.style.display = 'block';
         letter.querySelector('strong').style.display = 'none';
         shown = true;
       }
     });
+
+    // VALE GOMINHA! (todo dia 15)
+    const gominhaBox = document.getElementById('gominhaBox');
+    const gominhaCountdown = document.getElementById('gominhaCountdown');
+    const gominhaTicket = document.getElementById('gominhaTicket');
+
+    function updateGominha() {
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = now.getMonth();
+      const next15 = new Date(year, month, 15);
+      
+      if (now.getDate() > 15) {
+        next15.setMonth(month + 1);
+        next15.setDate(15);
+      }
+      if (next15 < now) {
+        next15.setMonth(next15.getMonth() + 1);
+        next15.setDate(15);
+      }
+
+      const diff = next15 - now;
+      const d = Math.floor(diff / 86400000);
+      const h = Math.floor((diff % 86400000) / 3600000);
+      const m = Math.floor((diff % 3600000) / 60000);
+      const s = Math.floor((diff % 60000) / 1000);
+
+      if (d === 0 && h === 0 && m === 0 && s === 0) {
+        gominhaBox.classList.remove('locked');
+        gominhaCountdown.style.display = 'none';
+        gominhaTicket.style.display = 'block';
+        document.querySelector('.lock-icon').style.display = 'none';
+      } else {
+        gominhaCountdown.innerHTML = `${d}d ${h}h<br>${m}m ${s}s`;
+        setTimeout(updateGominha, 1000);
+      }
+    }
+
+    gominhaBox.addEventListener('click', () => {
+      if (!gominhaBox.classList.contains('locked')) {
+        confetti({
+          particleCount: 100,
+          spread: 70,
+          origin: { y: 0.6 },
+          colors: ['#ff9a9e', '#fad0c4', '#ff6b9d']
+        });
+        alert("Vale Gominha! Resgatado com sucesso!");
+      }
+    });
+
+    // Inicia
+    updateGominha();
 
     // CONFETE
     document.getElementById('confettiBtn').addEventListener('click', () => {
@@ -812,7 +431,7 @@
     setInterval(() => {
       const h = document.createElement('div');
       h.classList.add('heart-float');
-      h.innerHTML = '❤️';
+      h.innerHTML = 'Heart';
       h.style.left = Math.random() * 100 + 'vw';
       h.style.animationDuration = (Math.random() * 4 + 5) + 's';
       heartsContainer.appendChild(h);
