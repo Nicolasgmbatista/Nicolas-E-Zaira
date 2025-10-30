@@ -271,10 +271,14 @@
     <p>Você é meu universo inteiro.</p>
     <p>Te amo mais do que as estrelas.</p>
 
+    <!-- SLIDESHOW COM 6 FOTOS -->
     <div class="slideshow" id="slideshow">
       <div class="slide active"><img src="img/se_admiramos.jpg" alt="Nós"></div>
       <div class="slide"><img src="img/se_amamos.jpg" alt="Nós"></div>
       <div class="slide"><img src="img/se_desejamos.jpg" alt="Nós"></div>
+      <div class="slide"><img src="img/se_aventuramos.jpg" alt="Nós"></div>
+      <div class="slide"><img src="img/se_escutamos.jpg" alt="Nós"></div>
+      <div class="slide"><img src="img/se_resolvemos.jpg" alt="Nós"></div>
     </div>
 
     <div class="countdown-container">
@@ -293,14 +297,14 @@
     </div>
 
     <div class="daily-letter" id="dailyLetter">
-      <strong>Clique para abrir sua carta de hoje</strong>
+      <strong>Clique para abrir sua carta de hoje amor!</strong>
       <p id="loveMessage" style="display:none; margin-top:15px; font-size:1.1rem; color:#ff8a65;"></p>
     </div>
 
     <!-- VALE GOMINHA! (ABERTO TODO DIA 15) -->
     <div class="gominha-container locked" id="gominhaBox">
-      <div class="lock-icon">Lock</div>
-      <div class="time" id="gominhaCountdown">--</div>
+      <div class="lock-icon">Resgate daqui:</div>
+      <div class="time" id="gominhaCountdown">Faltam 0d 0h<br>0m 0s</div>
       <div class="ready-text" id="readyText">Resgate seu prêmio AMOR!</div>
       <div class="ticket" id="gominhaTicket">
         Vale Gominha!
@@ -330,7 +334,7 @@
       overlay.style.display = 'none';
     });
 
-    // SLIDESHOW
+    // SLIDESHOW (6 FOTOS)
     const slides = document.querySelectorAll('.slide');
     let current = 0;
     setInterval(() => {
@@ -401,7 +405,7 @@
       }
     });
 
-    // VALE GOMINHA! (ABERTO TODO DIA 15)
+    // VALE GOMINHA! (DIA 15) — CRONÔMETRO SEMPRE VISÍVEL
     const gominhaBox = document.getElementById('gominhaBox');
     const gominhaCountdown = document.getElementById('gominhaCountdown');
     const readyText = document.getElementById('readyText');
@@ -437,7 +441,7 @@
         gominhaCountdown.style.display = 'none';
         document.querySelector('.lock-icon').style.display = 'none';
         readyText.style.display = 'block';
-      } else if (!isRedeemed) {
+      } else {
         gominhaCountdown.innerHTML = `Faltam ${d}d ${h}h<br>${m}m ${s}s`;
         setTimeout(updateGominha, 1000);
       }
@@ -474,7 +478,7 @@
       isRedeemed = false;
     }
 
-    // Inicia
+    // INICIA SEMPRE COM CRONÔMETRO
     updateGominha();
 
     // CONFETE
