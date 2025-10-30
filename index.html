@@ -120,35 +120,51 @@
       margin: 30px auto;
       max-width: 600px;
       padding: 20px;
-      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      background: rgba(106, 27, 154, 0.3);
       border-radius: 18px;
-      border: 3px dashed #ff6b9d;
-      color: #1a0b2e;
-      font-weight: bold;
+      border: 2px dashed #9c27b0;
+      color: #e0c3fc;
       text-align: center;
       cursor: pointer;
       transition: 0.4s;
-      box-shadow: 0 8px 20px rgba(255, 107, 157, 0.3);
+      box-shadow: 0 8px 20px rgba(255, 107, 157, 0.2);
+      position: relative;
+      overflow: hidden;
     }
-    .gominha-container:hover {
+    .gominha-container:hover:not(.locked) {
       transform: scale(1.03);
       box-shadow: 0 12px 30px rgba(255, 107, 157, 0.5);
     }
     .gominha-container.locked {
-      background: rgba(106, 27, 154, 0.3);
-      border: 2px dashed #9c27b0;
-      color: #e0c3fc;
       cursor: not-allowed;
+      opacity: 0.7;
     }
     .gominha-container .lock-icon {
-      font-size: 2rem;
+      font-size: 2.5rem;
       margin-bottom: 10px;
     }
-    .gominha-container .ticket {
-      font-size: 1.5rem;
-      font-family: 'Dancing Script', cursive;
-      color: #d63384;
+    .gominha-container .ready-text {
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: #ff6b9d;
       display: none;
+    }
+    .gominha-container .ticket {
+      display: none;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      color: #1a0b2e;
+      padding: 15px;
+      border-radius: 12px;
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.8rem;
+      margin-top: 10px;
+      border: 3px dashed #ff6b9d;
+      animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
     }
 
     .confetti-btn {
@@ -263,11 +279,14 @@
       <p id="loveMessage" style="display:none; margin-top:15px; font-size:1.1rem; color:#ff8a65;"></p>
     </div>
 
-    <!-- VALE GOMINHA! -->
-    <div class="gominha-container" id="gominhaBox">
-      <div class="lock-icon">Ticket Vale Gominha</div>
+    <!-- VALE GOMINHA! (TESTE: DIA 30) -->
+    <div class="gominha-container locked" id="gominhaBox">
+      <div class="lock-icon">Lock</div>
       <div class="time" id="gominhaCountdown">--</div>
-      <div class="ticket" id="gominhaTicket">Vale Gominha!</div>
+      <div class="ready-text" id="readyText">Resgate seu prêmio AMOR!</div>
+      <div class="ticket" id="gominhaTicket">
+        Vale Gominha!
+      </div>
     </div>
 
     <button class="confetti-btn" id="confettiBtn">Te amo, Gatinha!</button>
@@ -334,7 +353,7 @@
     startCountdown("2026-05-15T00:00:00", "anniversaryCountdown");
     startCountdown("2023-05-15T00:00:00", "togetherCountdown", true);
 
-    // 10 FRASES INICIAIS (você cola as outras depois)
+    // 10 FRASES INICIAIS
     const loveMessages = [
       "Seu sorriso ilumina até os dias mais escuros.",
       "Você é a razão do meu coração bater mais forte.",
@@ -364,53 +383,67 @@
       }
     });
 
-    // VALE GOMINHA! (todo dia 15)
+    // VALE GOMINHA! (TESTE: DIA 30)
     const gominhaBox = document.getElementById('gominhaBox');
     const gominhaCountdown = document.getElementById('gominhaCountdown');
+    const readyText = document.getElementById('readyText');
     const gominhaTicket = document.getElementById('gominhaTicket');
+    let isRedeemed = false;
 
     function updateGominha() {
       const now = new Date();
       const year = now.getFullYear();
       const month = now.getMonth();
-      const next15 = new Date(year, month, 15);
-      
-      if (now.getDate() > 15) {
-        next15.setMonth(month + 1);
-        next15.setDate(15);
-      }
-      if (next15 < now) {
-        next15.setMonth(next15.getMonth() + 1);
-        next15.setDate(15);
+      let next30 = new Date(year, month, 30);
+
+      // Ajusta para o próximo dia 30
+      if (now.getDate() >= 30) {
+        next30.setMonth(month + 1);
+        next30.setDate(30);
+        if (next30.getMonth() !== (month + 1) % 12) {
+          next30.setMonth(month + 2);
+          next30.setDate(1);
+        }
       }
 
-      const diff = next15 - now;
+      const diff = next30 - now;
       const d = Math.floor(diff / 86400000);
       const h = Math.floor((diff % 86400000) / 3600000);
       const m = Math.floor((diff % 3600000) / 60000);
       const s = Math.floor((diff % 60000) / 1000);
 
-      if (d === 0 && h === 0 && m === 0 && s === 0) {
+      // PRONTO PARA RESGATE?
+      if (d === 0 && h === 0 && m === 0 && s === 0 && !isRedeemed) {
         gominhaBox.classList.remove('locked');
         gominhaCountdown.style.display = 'none';
-        gominhaTicket.style.display = 'block';
         document.querySelector('.lock-icon').style.display = 'none';
-      } else {
+        readyText.style.display = 'block';
+      } else if (!isRedeemed) {
         gominhaCountdown.innerHTML = `${d}d ${h}h<br>${m}m ${s}s`;
         setTimeout(updateGominha, 1000);
       }
     }
 
     gominhaBox.addEventListener('click', () => {
-      if (!gominhaBox.classList.contains('locked')) {
-        confetti({
-          particleCount: 100,
-          spread: 70,
-          origin: { y: 0.6 },
-          colors: ['#ff9a9e', '#fad0c4', '#ff6b9d']
-        });
-        alert("Vale Gominha! Resgatado com sucesso!");
-      }
+      if (gominhaBox.classList.contains('locked') || isRedeemed) return;
+
+      isRedeemed = true;
+      readyText.style.display = 'none';
+      gominhaTicket.style.display = 'block';
+      gominhaBox.style.background = 'linear-gradient(135deg, #ff9a9e, #fad0c4)';
+      gominhaBox.style.color = '#1a0b2e';
+      gominhaBox.style.border = '3px dashed #ff6b9d';
+
+      confetti({
+        particleCount: 120,
+        spread: 80,
+        origin: { y: 0.6 },
+        colors: ['#ff9a9e', '#fad0c4', '#ff6b9d']
+      });
+
+      setTimeout(() => {
+        alert("Vale Gominha! Resgatado com sucesso, meu amor!");
+      }, 300);
     });
 
     // Inicia
