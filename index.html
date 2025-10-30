@@ -345,7 +345,7 @@
       font-size: 1rem;
     }
 
-    /* CORAÇÕES FLUTUANTES */
+    /* CORAÇÕES FLUTUANTES — GRANDES E MUITOS */
     .floating-hearts { 
       position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
       pointer-events: none; overflow: hidden; z-index: 1; 
@@ -353,21 +353,25 @@
     .heart-float { 
       position: absolute; 
       color: #ff6b9d;
-      font-size: 1.8rem;
+      font-size: 2.5rem;
       animation: float 6s infinite ease-in-out;
       opacity: 0;
-      text-shadow: 0 0 10px rgba(255, 107, 157, 0.8);
+      text-shadow: 0 0 12px rgba(255, 107, 157, 0.9);
       user-select: none;
+      pointer-events: none;
     }
     @keyframes float { 
       0% { 
-        transform: translateY(120vh) scale(0.4) rotate(0deg); 
+        transform: translateY(120vh) scale(0.3) rotate(0deg);
         opacity: 0; 
       }
-      10% { opacity: 0.85; }
-      90% { opacity: 0.85; }
+      15% { opacity: 1; }
+      50% {
+        transform: translateY(50vh) scale(1) rotate(180deg) translateX(20px);
+      }
+      85% { opacity: 1; }
       100% { 
-        transform: translateY(-100px) scale(1.2) rotate(360deg); 
+        transform: translateY(-150px) scale(0.8) rotate(360deg) translateX(-20px);
         opacity: 0; 
       }
     }
@@ -393,7 +397,7 @@
       .vinyl::before { width: 10px; height: 10px; }
       .music-icon { width: 32px; height: 32px; font-size: 1.3rem; }
       .music-title { font-size: 0.9rem; }
-      .heart-float { font-size: 1.4rem; }
+      .heart-float { font-size: 2.0rem; }
     }
   </style>
 </head>
@@ -512,38 +516,24 @@
       }
     });
 
-    // CORAÇÕES FLUTUANTES — AGORA COM CORAÇÃO VERDADEIRO
+    // CHUVA DE CORAÇÕES GRANDES (APENAS VERMELHO, SEM EXPLOSÃO)
     const heartsContainer = document.getElementById('hearts');
-    const sizes = ['1.2rem', '1.5rem', '1.8rem', '2.1rem'];
-    
-    // Opção 1: Coração em HTML (funciona em todos os navegadores)
-    setInterval(() => {
-      const h = document.createElement('div');
-      h.classList.add('heart-float');
-      h.innerHTML = '&hearts;';  // CORAÇÃO VERDADEIRO
-      h.style.left = Math.random() * 100 + 'vw';
-      h.style.fontSize = sizes[Math.floor(Math.random() * sizes.length)];
-      h.style.animationDuration = (Math.random() * 3 + 5) + 's';
-      h.style.animationDelay = Math.random() * 1.5 + 's';
-      heartsContainer.appendChild(h);
-      setTimeout(() => h.remove(), 8000);
-    }, 700);
+    const sizes = ['2.2rem', '2.6rem', '3.0rem', '3.4rem', '3.8rem'];
 
-    // Opção 2: Corações coloridos (descomente para usar)
-    /*
-    const heartTypes = ['❤️', '🩷', '💜', '💖', '💕'];
-    setInterval(() => {
+    function createHeart() {
       const h = document.createElement('div');
       h.classList.add('heart-float');
-      h.innerHTML = heartTypes[Math.floor(Math.random() * heartTypes.length)];
+      h.innerHTML = '&hearts;'; // Coração vermelho clássico
       h.style.left = Math.random() * 100 + 'vw';
       h.style.fontSize = sizes[Math.floor(Math.random() * sizes.length)];
-      h.style.animationDuration = (Math.random() * 3 + 5) + 's';
+      h.style.animationDuration = (Math.random() * 4 + 4) + 's';
       h.style.animationDelay = Math.random() * 1.5 + 's';
       heartsContainer.appendChild(h);
-      setTimeout(() => h.remove(), 8000);
-    }, 700);
-    */
+      setTimeout(() => h.remove(), 10000);
+    }
+
+    // Muitos corações, sem explosão inicial
+    setInterval(createHeart, 300);
 
     // SLIDESHOW
     const slides = document.querySelectorAll('.slide');
