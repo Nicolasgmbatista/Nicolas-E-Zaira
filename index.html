@@ -7,172 +7,197 @@
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #1a0b2e, #2d1b3a);
-      color: #e0c3fc;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      overflow-x: hidden;
-      position: relative;
-    }
-    .container {
-      background: rgba(20, 10, 40, 0.95);
-      padding: 40px 30px;
-      border-radius: 20px;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.6);
-      max-width: 900px;
-      width: 100%;
-      text-align: center;
-      position: relative;
-      z-index: 2;
-      border: 1px solid #6a1b9a;
-    }
-    h1 {
-      font-family: 'Dancing Script', cursive;
-      font-size: 4rem;
-      color: #ff6b9d;
-      margin-bottom: 15px;
-      text-shadow: 0 0 15px rgba(255, 107, 157, 0.5);
-      animation: glow 2s infinite alternate;
-    }
-    @keyframes glow {
-      from { text-shadow: 0 0 15px rgba(255, 107, 157, 0.5); }
-      to { text-shadow: 0 0 25px rgba(255, 107, 157, 0.8); }
-    }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #1a0b2e, #2d1b3a);
+    color: #e0c3fc;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    overflow-x: hidden;
+    position: relative;
+  }
+  .container {
+    background: rgba(20, 10, 40, 0.95);
+    padding: 40px 30px;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+    max-width: 900px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    border: 1px solid #6a1b9a;
+  }
+  h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 4rem;
+    color: #ff6b9d;
+    margin-bottom: 15px;
+    text-shadow: 0 0 15px rgba(255, 107, 157, 0.5);
+    animation: glow 2s infinite alternate;
+  }
+  @keyframes glow {
+    from { text-shadow: 0 0 15px rgba(255, 107, 157, 0.5); }
+    to { text-shadow: 0 0 25px rgba(255, 107, 157, 0.8); }
+  }
 
-    .slideshow {
-      position: relative;
-      width: 100%;
-      max-width: 600px;
-      margin: 30px auto;
-      height: 300px;
-      overflow: hidden;
-      border-radius: 18px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    }
-    .slide {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      opacity: 0;
-      transition: opacity 1s ease;
-    }
-    .slide.active { opacity: 1; }
-    .slide img {
-      width: 100%; height: 100%; object-fit: cover; cursor: zoom-in;
-      border-radius: 18px;
-    }
+  /* SLIDESHOW CORRIGIDO: FOTOS INTEIRAS */
+  .slideshow {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    margin: 30px auto;
+    height: 450px; /* Aumentado para caber fotos grandes */
+    overflow: hidden;
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    background: #000; /* Fundo preto para consistência */
+  }
+  .slide {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease;
+  }
+  .slide.active { opacity: 1; }
+  .slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* MOSTRA A FOTO INTEIRA */
+    background: #000;
+    border-radius: 18px;
+    cursor: zoom-in;
+  }
 
-    .countdown-container {
-      display: flex;
-      justify-content: center;
-      gap: 25px;
-      margin: 35px 0;
-      flex-wrap: nowrap;
-      overflow-x: auto;
-    }
-    .countdown-box {
-      background: rgba(106, 27, 154, 0.3);
-      padding: 18px 15px;
-      border-radius: 15px;
-      min-width: 130px;
-      backdrop-filter: blur(5px);
-      border: 1px solid #9c27b0;
-    }
-    .countdown-box h3 {
-      font-size: 0.9rem;
-      color: #ff8a65;
-      margin-bottom: 8px;
-    }
-    .countdown-box .time {
-      font-size: 1.6rem;
-      font-weight: bold;
-      color: #ff6b9d;
-    }
+  /* CONTADORES EM LINHA */
+  .countdown-container {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin: 35px 0;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  }
+  .countdown-box {
+    background: rgba(106, 27, 154, 0.3);
+    padding: 18px 15px;
+    border-radius: 15px;
+    min-width: 130px;
+    backdrop-filter: blur(5px);
+    border: 1px solid #9c27b0;
+  }
+  .countdown-box h3 {
+    font-size: 0.9rem;
+    color: #ff8a65;
+    margin-bottom: 8px;
+  }
+  .countdown-box .time {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #ff6b9d;
+  }
 
-    .daily-letter {
-      margin: 30px auto;
-      max-width: 600px;
-      padding: 20px;
-      background: rgba(106, 27, 154, 0.2);
-      border-radius: 15px;
-      border: 1px dashed #9c27b0;
-      color: #e0c3fc;
-      font-style: italic;
-      line-height: 1.7;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    .daily-letter:hover {
-      background: rgba(106, 27, 154, 0.4);
-      transform: translateY(-3px);
-    }
+  /* CARTA SECRETA */
+  .daily-letter {
+    margin: 30px auto;
+    max-width: 600px;
+    padding: 20px;
+    background: rgba(106, 27, 154, 0.2);
+    border-radius: 15px;
+    border: 1px dashed #9c27b0;
+    color: #e0c3fc;
+    font-style: italic;
+    line-height: 1.7;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  .daily-letter:hover {
+    background: rgba(106, 27, 154, 0.4);
+    transform: translateY(-3px);
+  }
 
-    .confetti-btn {
-      margin: 25px auto;
-      padding: 12px 30px;
-      background: linear-gradient(45deg, #ff6b9d, #d63384);
-      color: white;
-      border: none;
-      border-radius: 50px;
-      font-size: 1.1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: 0.3s;
-      box-shadow: 0 5px 15px rgba(214, 51, 132, 0.4);
-    }
-    .confetti-btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 8px 20px rgba(214, 51, 132, 0.6);
-    }
+  /* BOTÃO CONFETE */
+  .confetti-btn {
+    margin: 25px auto;
+    padding: 12px 30px;
+    background: linear-gradient(45deg, #ff6b9d, #d63384);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 5px 15px rgba(214, 51, 132, 0.4);
+  }
+  .confetti-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(214, 51, 132, 0.6);
+  }
 
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0,0,0,0.9);
-      z-index: 9999;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-    .modal img {
-      max-width: 90%;
-      max-height: 90%;
-      border-radius: 15px;
-      box-shadow: 0 0 30px rgba(255, 107, 157, 0.5);
-    }
-    .close {
-      position: absolute;
-      top: 20px; right: 30px;
-      color: white;
-      font-size: 2rem;
-      cursor: pointer;
-    }
+  /* MODAL ZOOM */
+  .modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.9);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .modal img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 15px;
+    box-shadow: 0 0 30px rgba(255, 107, 157, 0.5);
+  }
+  .close {
+    position: absolute;
+    top: 20px; right: 30px;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+  }
 
-    .play-overlay {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0,0,0,0.7); z-index: 9999; cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      color: white; font-size: 1.6rem; font-weight: bold;
-    }
-    .floating-hearts { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; overflow: hidden; z-index: 1; }
-    .heart-float { position: absolute; color: rgba(255, 107, 157, 0.2); font-size: 1.5rem; animation: float 8s infinite ease-in-out; }
-    @keyframes float { 0% { transform: translateY(0) rotate(0deg); opacity: 0.7; } 100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; } }
+  .play-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.7); z-index: 9999; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-size: 1.6rem; font-weight: bold;
+  }
+  .floating-hearts { 
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+    pointer-events: none; overflow: hidden; z-index: 1; 
+  }
+  .heart-float { 
+    position: absolute; color: rgba(255, 107, 157, 0.2); font-size: 1.5rem; 
+    animation: float 8s infinite ease-in-out; 
+  }
+  @keyframes float { 
+    0% { transform: translateY(0) rotate(0deg); opacity: 0.7; } 
+    100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; } 
+  }
 
-    @media (max-width: 600px) {
-      h1 { font-size: 2.8rem; }
-      .slideshow { height: 220px; }
-      .countdown-container { gap: 15px; }
-      .countdown-box { min-width: 110px; padding: 15px 10px; }
-    }
-  </style>
+  .footer {
+    margin-top: 30px;
+    font-size: 0.9rem;
+    color: #b39ddb;
+  }
+
+  @media (max-width: 600px) {
+    h1 { font-size: 2.8rem; }
+    .slideshow { height: 300px; }
+    .countdown-container { gap: 15px; }
+    .countdown-box { min-width: 110px; padding: 15px 10px; }
+  }
+</style>
 </head>
 <body>
 
