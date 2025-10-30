@@ -23,7 +23,7 @@
     .container {
       background: rgba(255, 255, 255, 0.92);
       padding: 40px 30px;
-:radius: 25px;
+      border-radius: 25px;
       box-shadow: 0 15px 35px rgba(0,0,0,0.1);
       max-width: 800px;
       width: 100%;
@@ -74,7 +74,6 @@
     .floating-hearts { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; overflow: hidden; z-index: 1; }
     .heart-float { position: absolute; color: rgba(255, 107, 157, 0.3); font-size: 1.5rem; animation: float 6s infinite ease-in-out; }
     @keyframes float { 0% { transform: translateY(0) rotate(0deg); opacity: 0.7; } 100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; } }
-    .debug { color: red; font-size: 0.8rem; margin-top: 10px; }
     @media (max-width: 600px) { h1 { font-size: 2.5rem; } .gallery img { width: 140px; height: 140px; } }
   </style>
 </head>
@@ -89,15 +88,12 @@
     <p>Você é o motivo do meu sorriso todos os dias.</p>
     <p>Te amo mais do que ontem, e menos do que amanhã.</p>
 
+    <!-- GALERIA CORRIGIDA: img/ -->
     <div class="gallery">
-      <img src="imagem/se_admiramos.jpg" alt="Se admiramos" 
-           onerror="this.src='https://via.placeholder.com/180/FFB6C1/FFFFFF?text=se_admiramos.jpg'; this.nextElementSibling.style.display='block';">
-      <img src="imagem/se_amamos.jpg" alt="Se amamos" 
-           onerror="this.src='https://via.placeholder.com/180/FF69B4/FFFFFF?text=se_amamos.jpg'; this.nextElementSibling.style.display='block';">
-      <img src="imagem/se_desejamos.jpg" alt="Se desejamos" 
-           onerror="this.src='https://via.placeholder.com/180/FF1493/FFFFFF?text=se_desejamos.jpg'; this.nextElementSibling.style.display='block';">
+      <img src="img/se_admiramos.jpg" alt="Se admiramos">
+      <img src="img/se_amamos.jpg" alt="Se amamos">
+      <img src="img/se_desejamos.jpg" alt="Se desejamos">
     </div>
-    <div class="debug" style="display:none;">Imagem não carregou. Reupload necessário.</div>
 
     <div class="countdown-container">
       <div class="countdown-box">
@@ -147,7 +143,6 @@
     startCountdown("2026-01-01T00:00:00", "birthdayCountdown");
     startCountdown("2026-05-15T00:00:00", "anniversaryCountdown");
 
-    // Corações
     const heartsContainer = document.getElementById('hearts');
     setInterval(() => {
       const h = document.createElement('div');
