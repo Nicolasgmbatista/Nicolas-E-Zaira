@@ -233,39 +233,79 @@
       color: white; font-size: 1.6rem; font-weight: bold;
     }
 
-    /* CONTROLE DE MÚSICA DENTRO DO QUADRADO */
+    /* CONTROLE DE MÚSICA COM DISCO GIRANDO */
     .music-player {
       margin: 25px auto 15px;
       max-width: 600px;
-      padding: 15px 20px;
+      padding: 18px 25px;
       background: rgba(106, 27, 154, 0.3);
-      border-radius: 15px;
+      border-radius: 18px;
       border: 1px dashed #9c27b0;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 12px;
+      gap: 15px;
       color: #e0c3fc;
       font-size: 1rem;
       backdrop-filter: blur(5px);
       transition: 0.3s;
+      position: relative;
+      overflow: hidden;
     }
     .music-player:hover {
       background: rgba(106, 27, 154, 0.5);
       transform: translateY(-2px);
     }
+
+    .vinyl-container {
+      position: relative;
+      width: 40px;
+      height: 40px;
+    }
+    .vinyl {
+      width: 40px;
+      height: 40px;
+      background: radial-gradient(circle, #1a0b2e 30%, #ff6b9d 31%, #1a0b2e 40%, #ff6b9d 41%, #1a0b2e 60%);
+      border-radius: 50%;
+      position: relative;
+      box-shadow: 0 0 15px rgba(255, 107, 157, 0.4);
+    }
+    .vinyl::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 12px; height: 12px;
+      background: #ff6b9d;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 10px #ff6b9d;
+    }
+    .vinyl.spinning {
+      animation: spin 3s linear infinite;
+    }
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
     .music-icon {
       font-size: 1.8rem;
       color: #ff6b9d;
       cursor: pointer;
       transition: 0.3s;
+      padding: 8px;
+      border-radius: 50%;
+      background: rgba(255, 107, 157, 0.1);
     }
     .music-icon:hover {
-      transform: scale(1.2);
+      background: rgba(255, 107, 157, 0.3);
+      transform: scale(1.1);
     }
-    .music-status {
+
+    .music-title {
       font-weight: 600;
       color: #ff8a65;
+      font-size: 1rem;
     }
 
     .floating-hearts { 
@@ -293,8 +333,12 @@
       .countdown-container { gap: 15px; }
       .countdown-box { min-width: 110px; padding: 15px 10px; }
       .gominha-container .time { font-size: 1.4rem; }
-      .music-player { padding: 12px 15px; font-size: 0.9rem; }
+      .music-player { padding: 14px 18px; gap: 10px; }
+      .vinyl-container { width: 32px; height: 32px; }
+      .vinyl { width: 32px; height: 32px; }
+      .vinyl::before { width: 10px; height: 10px; }
       .music-icon { font-size: 1.5rem; }
+      .music-title { font-size: 0.9rem; }
     }
   </style>
 </head>
@@ -349,10 +393,13 @@
       </div>
     </div>
 
-    <!-- CONTROLE DE MÚSICA DENTRO DO QUADRADO -->
+    <!-- CONTROLE DE MÚSICA COM DISCO GIRANDO -->
     <div class="music-player" id="musicPlayer">
+      <div class="vinyl-container">
+        <div class="vinyl" id="vinyl"></div>
+      </div>
       <span class="music-icon" id="musicToggle">Play</span>
-      <span class="music-status" id="musicStatus">Toque para começar</span>
+      <span class="music-title">A Thousand Years – Christina Perri</span>
     </div>
 
     <button class="confetti-btn" id="confettiBtn">Te amo, Gatinha!</button>
@@ -370,36 +417,42 @@
   </audio>
 
   <script>
-    // AUTOPLAY + CONTROLE DE MÚSICA
+    // AUTOPLAY + CONTROLE DE MÚSICA COM DISCO
     const overlay = document.getElementById('playOverlay');
     const music = document.getElementById('bgMusic');
     const musicToggle = document.getElementById('musicToggle');
-    const musicStatus = document.getElementById('musicStatus');
+    const vinyl = document.getElementById('vinyl');
     const musicPlayer = document.getElementById('musicPlayer');
     let isPlaying = false;
 
     overlay.addEventListener('click', () => {
       music.play().catch(() => {});
       overlay.style.display = 'none';
+      startMusic();
+    });
+
+    function startMusic() {
       isPlaying = true;
       musicToggle.innerHTML = 'Pause';
-      musicStatus.textContent = 'Tocando: A Thousand Years';
+      vinyl.classList.add('spinning');
       musicPlayer.style.background = 'rgba(106, 27, 154, 0.5)';
-    });
+    }
+
+    function stopMusic() {
+      isPlaying = false;
+      musicToggle.innerHTML = 'Play';
+      vinyl.classList.remove('spinning');
+      musicPlayer.style.background = 'rgba(106, 27, 154, 0.3)';
+    }
 
     musicToggle.addEventListener('click', () => {
       if (isPlaying) {
         music.pause();
-        musicToggle.innerHTML = 'Play';
-        musicStatus.textContent = 'Pausado';
-        musicPlayer.style.background = 'rgba(106, 27, 154, 0.3)';
+        stopMusic();
       } else {
         music.play().catch(() => {});
-        musicToggle.innerHTML = 'Pause';
-        musicStatus.textContent = 'Tocando: A Thousand Years';
-        musicPlayer.style.background = 'rgba(106, 27, 154, 0.5)';
+        startMusic();
       }
-      isPlaying = !isPlaying;
     });
 
     // SLIDESHOW (6 FOTOS)
