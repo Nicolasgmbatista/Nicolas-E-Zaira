@@ -115,7 +115,7 @@
       transform: translateY(-3px);
     }
 
-    /* VALE GOMINHA! */
+    /* VALE GOMINHA! (DIA 15) */
     .gominha-container {
       margin: 30px auto;
       max-width: 600px;
@@ -153,7 +153,7 @@
       color: #ff6b9d;
       line-height: 1.4;
       margin: 8px 0;
-      min-height: 3em; /* Garante altura fixa */
+      min-height: 3em;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -279,7 +279,7 @@
 
     <div class="countdown-container">
       <div class="countdown-box">
-        <h3>Aniversário Dela</h3>
+        <h3>Seu Aniversário</h3>
         <div class="time" id="birthdayCountdown">--</div>
       </div>
       <div class="countdown-box">
@@ -297,7 +297,7 @@
       <p id="loveMessage" style="display:none; margin-top:15px; font-size:1.1rem; color:#ff8a65;"></p>
     </div>
 
-    <!-- VALE GOMINHA! (ABERTO TODO DIA 30) -->
+    <!-- VALE GOMINHA! (ABERTO TODO DIA 15) -->
     <div class="gominha-container locked" id="gominhaBox">
       <div class="lock-icon">Lock</div>
       <div class="time" id="gominhaCountdown">--</div>
@@ -401,42 +401,38 @@
       }
     });
 
-    // VALE GOMINHA! (ABERTO TODO DIA 30)
+    // VALE GOMINHA! (ABERTO TODO DIA 15)
     const gominhaBox = document.getElementById('gominhaBox');
     const gominhaCountdown = document.getElementById('gominhaCountdown');
     const readyText = document.getElementById('readyText');
     const gominhaTicket = document.getElementById('gominhaTicket');
     let isRedeemed = localStorage.getItem('gominhaRedeemed') === 'true';
 
-    function getNext30() {
+    function getNext15() {
       const now = new Date();
       const year = now.getFullYear();
       const month = now.getMonth();
-      let next30 = new Date(year, month, 30);
+      let next15 = new Date(year, month, 15);
 
-      if (now.getDate() > 30 || (now.getDate() === 30 && isRedeemed)) {
-        next30.setMonth(month + 1);
-        next30.setDate(30);
-        if (next30.getMonth() !== (month + 1) % 12) {
-          next30.setMonth(month + 2);
-          next30.setDate(1);
-        }
+      if (now.getDate() >= 15 && isRedeemed) {
+        next15.setMonth(month + 1);
+        next15.setDate(15);
       }
-      return next30;
+      return next15;
     }
 
     function updateGominha() {
       const now = new Date();
       const today = now.getDate();
-      const next30 = getNext30();
-      const diff = next30 - now;
+      const next15 = getNext15();
+      const diff = next15 - now;
 
       const d = Math.floor(diff / 86400000);
       const h = Math.floor((diff % 86400000) / 3600000);
       const m = Math.floor((diff % 3600000) / 60000);
       const s = Math.floor((diff % 60000) / 1000);
 
-      if (today === 30 && !isRedeemed) {
+      if (today === 15 && !isRedeemed) {
         gominhaBox.classList.remove('locked');
         gominhaCountdown.style.display = 'none';
         document.querySelector('.lock-icon').style.display = 'none';
@@ -472,8 +468,8 @@
       }, 300);
     });
 
-    // Reinicia no próximo mês
-    if (new Date().getDate() === 1 && localStorage.getItem('gominhaRedeemed') === 'true') {
+    // Reinicia todo dia 16
+    if (new Date().getDate() === 16 && localStorage.getItem('gominhaRedeemed') === 'true') {
       localStorage.setItem('gominhaRedeemed', 'false');
       isRedeemed = false;
     }
