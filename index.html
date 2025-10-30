@@ -46,6 +46,15 @@
       to { text-shadow: 0 0 25px rgba(255, 107, 157, 0.8); }
     }
 
+    /* LOGO */
+    .logo {
+      margin-bottom: 20px;
+      max-width: 250px;
+      height: auto;
+      filter: drop-shadow(0 0 15px rgba(255, 107, 157, 0.5));
+      border-radius: 12px;
+    }
+
     .slideshow {
       position: relative;
       width: 100%;
@@ -345,6 +354,40 @@
       font-size: 1rem;
     }
 
+    /* ESPAÇO PARA TEXTO PERSONALIZADO */
+    .love-note {
+      margin: 30px auto;
+      max-width: 600px;
+      padding: 25px;
+      background: linear-gradient(135deg, rgba(106, 27, 154, 0.4), rgba(156, 39, 176, 0.3));
+      border-radius: 20px;
+      border: 2px solid #ff6b9d;
+      color: #fff;
+      font-style: italic;
+      line-height: 1.8;
+      font-size: 1.1rem;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(255, 107, 157, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+    .love-note::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: radial-gradient(circle at 50% 50%, rgba(255, 107, 157, 0.1), transparent 70%);
+      pointer-events: none;
+    }
+    .love-note strong {
+      display: block;
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.6rem;
+      color: #ff6b9d;
+      margin-bottom: 12px;
+      text-shadow: 0 0 8px rgba(255, 107, 157, 0.6);
+    }
+
     /* CORAÇÕES FLUTUANTES — GRANDES, SUAVES E SEM ROTAÇÃO */
     .floating-hearts { 
       position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
@@ -384,6 +427,7 @@
 
     @media (max-width: 600px) {
       h1 { font-size: 2.8rem; }
+      .logo { max-width: 180px; }
       .slideshow { height: 300px; }
       .countdown-container { gap: 15px; }
       .countdown-box { min-width: 110px; padding: 15px 10px; }
@@ -398,6 +442,8 @@
       .music-icon { width: 32px; height: 32px; font-size: 1.3rem; }
       .music-title { font-size: 0.9rem; }
       .heart-float { font-size: 2.0rem; }
+      .love-note { padding: 20px; font-size: 1rem; }
+      .love-note strong { font-size: 1.4rem; }
     }
   </style>
 </head>
@@ -409,6 +455,9 @@
   <div class="floating-hearts" id="hearts"></div>
 
   <div class="container">
+    <!-- LOGO -->
+    <img src="img/logo_site_N-e-Z.jpg" alt="N & Z" class="logo">
+
     <h1>Para Zaira, Meu Amor</h1>
     <p>Você é meu universo inteiro.</p>
     <p>Te amo mais do que as estrelas.</p>
@@ -461,6 +510,21 @@
       </div>
       <div class="music-icon" id="musicToggle">Play</div>
       <span class="music-title">A Thousand Years – Christina Perri</span>
+    </div>
+
+    <!-- ESPAÇO PARA TEXTO PERSONALIZADO -->
+    <div class="love-note">
+      <strong>Minha Gatinha,</strong>
+      <p>
+        Desde o primeiro dia que te vi, meu coração soube que você seria minha para sempre.  
+        Cada momento ao seu lado é um presente que guardo com carinho.  
+        Você é meu lar, minha paz, meu amor eterno.  
+        <br><br>
+        Prometo te amar todos os dias, com mais força a cada amanhecer.  
+        Você é o motivo do meu sorriso, e eu sou o homem mais feliz do mundo por te ter.
+      </p>
+      <br>
+      <em>Com todo o meu amor, seu futuro esposo.</em>
     </div>
 
     <button class="confetti-btn" id="confettiBtn">Te amo, Gatinha!</button>
@@ -532,7 +596,6 @@
       setTimeout(() => h.remove(), 10000);
     }
 
-    // Frequência reduzida: a cada 500ms
     setInterval(createHeart, 500);
 
     // SLIDESHOW
