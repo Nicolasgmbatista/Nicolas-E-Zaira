@@ -97,7 +97,7 @@
       color: #ff6b9d;
     }
 
-    /* CARTA DIÁRIA EM DESTAQUE */
+    /* CARTA DIÁRIA */
     .daily-letter {
       margin: 30px auto;
       max-width: 600px;
@@ -136,10 +136,10 @@
     }
     #loveMessage {
       font-size: 1.25rem;
-      color: #ff8a65;
+      color: #ffb3d9;
       font-weight: 500;
       margin-top: 15px;
-      text-shadow: 0 0 8px rgba(255, 138, 101, 0.3);
+      text-shadow: 0 0 8px rgba(255, 179, 217, 0.4);
       animation: fadeIn 0.6s ease-in;
     }
     @keyframes fadeIn {
@@ -352,15 +352,23 @@
     }
     .heart-float { 
       position: absolute; 
-      color: rgba(255, 107, 157, 0.3); 
-      animation: float 7s infinite ease-in-out; 
-      opacity: 0.8;
+      color: #ff6b9d;
+      font-size: 1.8rem;
+      animation: float 6s infinite ease-in-out;
+      opacity: 0;
+      text-shadow: 0 0 8px rgba(255, 107, 157, 0.6);
     }
     @keyframes float { 
-      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; } 
+      0% { 
+        transform: translateY(120vh) scale(0.5) rotate(0deg); 
+        opacity: 0; 
+      }
       10% { opacity: 0.8; }
       90% { opacity: 0.8; }
-      100% { transform: translateY(-100px) rotate(360deg); opacity: 0; } 
+      100% { 
+        transform: translateY(-100px) scale(1) rotate(360deg); 
+        opacity: 0; 
+      }
     }
 
     .footer {
@@ -384,6 +392,7 @@
       .vinyl::before { width: 10px; height: 10px; }
       .music-icon { width: 32px; height: 32px; font-size: 1.3rem; }
       .music-title { font-size: 0.9rem; }
+      .heart-float { font-size: 1.4rem; }
     }
   </style>
 </head>
@@ -502,21 +511,21 @@
       }
     });
 
-    // CORAÇÕES FLUTUANTES — SÓ O SÍMBOLO Heart + MUITOS!
+    // CORAÇÕES FLUTUANTES — SÓ O SÍMBOLO Heart
     const heartsContainer = document.getElementById('hearts');
-    const sizes = ['1rem', '1.3rem', '1.6rem', '2rem'];
+    const sizes = ['1.2rem', '1.5rem', '1.8rem', '2.1rem'];
     
     setInterval(() => {
       const h = document.createElement('div');
       h.classList.add('heart-float');
-      h.innerHTML = 'Heart';  // SÓ O SÍMBOLO!
+      h.innerHTML = 'Heart';  // SÓ O SÍMBOLO DO CORAÇÃO
       h.style.left = Math.random() * 100 + 'vw';
       h.style.fontSize = sizes[Math.floor(Math.random() * sizes.length)];
       h.style.animationDuration = (Math.random() * 3 + 5) + 's';
-      h.style.animationDelay = Math.random() * 2 + 's';
+      h.style.animationDelay = Math.random() * 1.5 + 's';
       heartsContainer.appendChild(h);
       setTimeout(() => h.remove(), 8000);
-    }, 800); // A cada 800ms = MUITO amor!
+    }, 700); // A cada 700ms = CHUVA DE AMOR!
 
     // SLIDESHOW
     const slides = document.querySelectorAll('.slide');
