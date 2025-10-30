@@ -279,7 +279,7 @@
       <p id="loveMessage" style="display:none; margin-top:15px; font-size:1.1rem; color:#ff8a65;"></p>
     </div>
 
-    <!-- VALE GOMINHA! (TESTE: DIA 30) -->
+    <!-- VALE GOMINHA! (ABERTO TODO DIA 30) -->
     <div class="gominha-container locked" id="gominhaBox">
       <div class="lock-icon">Lock</div>
       <div class="time" id="gominhaCountdown">--</div>
@@ -383,7 +383,7 @@
       }
     });
 
-    // VALE GOMINHA! (TESTE: DIA 30)
+    // VALE GOMINHA! (ABERTO TODO DIA 30)
     const gominhaBox = document.getElementById('gominhaBox');
     const gominhaCountdown = document.getElementById('gominhaCountdown');
     const readyText = document.getElementById('readyText');
@@ -392,18 +392,14 @@
 
     function updateGominha() {
       const now = new Date();
+      const today = now.getDate();
       const year = now.getFullYear();
       const month = now.getMonth();
-      let next30 = new Date(year, month, 30);
 
-      // Ajusta para o próximo dia 30
-      if (now.getDate() >= 30) {
-        next30.setMonth(month + 1);
-        next30.setDate(30);
-        if (next30.getMonth() !== (month + 1) % 12) {
-          next30.setMonth(month + 2);
-          next30.setDate(1);
-        }
+      // Próximo dia 30
+      let next30 = new Date(year, month, 30);
+      if (next30.getMonth() !== month) {
+        next30 = new Date(year, month + 1, 1);
       }
 
       const diff = next30 - now;
@@ -412,14 +408,14 @@
       const m = Math.floor((diff % 3600000) / 60000);
       const s = Math.floor((diff % 60000) / 1000);
 
-      // PRONTO PARA RESGATE?
-      if (d === 0 && h === 0 && m === 0 && s === 0 && !isRedeemed) {
+      // É HOJE DIA 30?
+      if (today === 30 && !isRedeemed) {
         gominhaBox.classList.remove('locked');
         gominhaCountdown.style.display = 'none';
         document.querySelector('.lock-icon').style.display = 'none';
         readyText.style.display = 'block';
       } else if (!isRedeemed) {
-        gominhaCountdown.innerHTML = `${d}d ${h}h<br>${m}m ${s}s`;
+        gominhaCountdown.innerHTML = `Faltam ${d}d ${h}h<br>${m}m ${s}s`;
         setTimeout(updateGominha, 1000);
       }
     }
