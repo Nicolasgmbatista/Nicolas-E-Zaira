@@ -265,7 +265,7 @@
       color: white; font-size: 1.6rem; font-weight: bold;
     }
 
-    /* CONTROLE DE MÚSICA COM ▶ */
+    /* CONTROLE DE MÚSICA */
     .music-player {
       margin: 25px auto 15px;
       max-width: 600px;
@@ -345,37 +345,22 @@
       font-size: 1rem;
     }
 
-    /* CORAÇÕES AO REDOR DO QUADRADO */
-    .hearts-border {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      pointer-events: none;
-      z-index: 1;
-      overflow: hidden;
-    }
-    .heart-border {
-      position: absolute;
-      color: rgba(255, 107, 157, 0.15);
-      animation: floatUp 12s infinite ease-in-out;
-      opacity: 0.7;
-    }
-    @keyframes floatUp {
-      0% { transform: translateY(0) rotate(0deg); opacity: 0.7; }
-      100% { transform: translateY(-120vh) rotate(360deg); opacity: 0; }
-    }
-
+    /* CORAÇÕES FLUTUANTES — SÓ SÍMBOLO Heart */
     .floating-hearts { 
       position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
       pointer-events: none; overflow: hidden; z-index: 1; 
     }
     .heart-float { 
-      position: absolute; color: rgba(255, 107, 157, 0.2); font-size: 1.5rem; 
-      animation: float 8s infinite ease-in-out; 
+      position: absolute; 
+      color: rgba(255, 107, 157, 0.25); 
+      animation: float 7s infinite ease-in-out; 
+      opacity: 0.8;
     }
     @keyframes float { 
-      0% { transform: translateY(0) rotate(0deg); opacity: 0.7; } 
-      100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; } 
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; } 
+      10% { opacity: 0.8; }
+      90% { opacity: 0.8; }
+      100% { transform: translateY(-100px) rotate(360deg); opacity: 0; } 
     }
 
     .footer {
@@ -406,10 +391,7 @@
 
   <div class="play-overlay" id="playOverlay">Toque para ouvir nossa música</div>
 
-  <!-- CORAÇÕES AO REDOR DO QUADRADO -->
-  <div class="hearts-border" id="heartsBorder"></div>
-
-  <!-- CORAÇÕES FLUTUANTES (FUNDO) -->
+  <!-- CORAÇÕES FLUTUANTES (SÓ SÍMBOLO Heart) -->
   <div class="floating-hearts" id="hearts"></div>
 
   <div class="container">
@@ -417,7 +399,7 @@
     <p>Você é meu universo inteiro.</p>
     <p>Te amo mais do que as estrelas.</p>
 
-    <!-- SLIDESHOW COM 6 FOTOS -->
+    <!-- SLIDESHOW -->
     <div class="slideshow" id="slideshow">
       <div class="slide active"><img src="img/se_admiramos.jpg" alt="Nós"></div>
       <div class="slide"><img src="img/se_amamos.jpg" alt="Nós"></div>
@@ -442,15 +424,15 @@
       </div>
     </div>
 
-    <!-- CARTA DIÁRIA EM DESTAQUE -->
+    <!-- CARTA DIÁRIA -->
     <div class="daily-letter" id="dailyLetter">
       <strong>Clique para abrir sua carta de hoje amor!</strong>
       <p id="loveMessage" style="display:none;"></p>
     </div>
 
-    <!-- VALE GOMINHA! (ABERTO TODO DIA 15) -->
+    <!-- VALE GOMINHA! -->
     <div class="gominha-container locked" id="gominhaBox">
-      <div class="lock-icon">Resgate daqui:</div>
+      <div class="lock-icon">Resgate Vale Gominha Em:</div>
       <div class="time" id="gominhaCountdown">0d 0h 0m 0s</div>
       <div class="ready-text" id="readyText">Resgate seu prêmio AMOR!</div>
       <div class="ticket" id="gominhaTicket">
@@ -458,7 +440,7 @@
       </div>
     </div>
 
-    <!-- CONTROLE DE MÚSICA: ▶ e || -->
+    <!-- CONTROLE DE MÚSICA -->
     <div class="music-player" id="musicPlayer">
       <div class="vinyl-container">
         <div class="vinyl" id="vinyl"></div>
@@ -482,7 +464,7 @@
   </audio>
 
   <script>
-    // AUTOPLAY + CONTROLE DE MÚSICA
+    // AUTOPLAY + CONTROLE
     const overlay = document.getElementById('playOverlay');
     const music = document.getElementById('bgMusic');
     const musicToggle = document.getElementById('musicToggle');
@@ -520,58 +502,21 @@
       }
     });
 
-    // CORAÇÕES AO REDOR DO QUADRADO
-    const heartsBorder = document.getElementById('heartsBorder');
-    const sizes = ['1.2rem', '1.6rem', '2rem'];
-    let heartCount = 0;
-
-    function createBorderHeart() {
-      if (heartCount >= 30) return;
-      const heart = document.createElement('div');
-      heart.classList.add('heart-border');
-      heart.innerHTML = 'Heart';
-
-      const size = sizes[Math.floor(Math.random() * sizes.length)];
-      heart.style.fontSize = size;
-
-      const side = Math.floor(Math.random() * 4);
-      if (side === 0) { // Top
-        heart.style.left = Math.random() * 100 + '%';
-        heart.style.top = '-20px';
-      } else if (side === 1) { // Right
-        heart.style.right = '-20px';
-        heart.style.top = Math.random() * 100 + '%';
-      } else if (side === 2) { // Bottom
-        heart.style.left = Math.random() * 100 + '%';
-        heart.style.bottom = '-20px';
-      } else { // Left
-        heart.style.left = '-20px';
-        heart.style.top = Math.random() * 100 + '%';
-      }
-
-      heart.style.animationDuration = (Math.random() * 6 + 8) + 's';
-      heartsBorder.appendChild(heart);
-      heartCount++;
-
-      setTimeout(() => {
-        heart.remove();
-        heartCount--;
-      }, 14000);
-    }
-
-    setInterval(createBorderHeart, 2500 + Math.random() * 2000);
-
-    // CORAÇÕES FLUTUANTES
+    // CORAÇÕES FLUTUANTES — SÓ SÍMBOLO Heart + MAIS FREQUENTES
     const heartsContainer = document.getElementById('hearts');
+    const sizes = ['1rem', '1.3rem', '1.6rem', '2rem'];
+    
     setInterval(() => {
       const h = document.createElement('div');
       h.classList.add('heart-float');
       h.innerHTML = 'Heart';
       h.style.left = Math.random() * 100 + 'vw';
-      h.style.animationDuration = (Math.random() * 4 + 5) + 's';
+      h.style.fontSize = sizes[Math.floor(Math.random() * sizes.length)];
+      h.style.animationDuration = (Math.random() * 3 + 5) + 's';
+      h.style.animationDelay = Math.random() * 2 + 's';
       heartsContainer.appendChild(h);
-      setTimeout(() => h.remove(), 9000);
-    }, 1200);
+      setTimeout(() => h.remove(), 8000);
+    }, 800); // A cada 800ms = MUITO mais corações!
 
     // SLIDESHOW
     const slides = document.querySelectorAll('.slide');
@@ -614,7 +559,7 @@
     startCountdown("2026-05-15T00:00:00", "anniversaryCountdown");
     startCountdown("2023-05-15T00:00:00", "togetherCountdown", true);
 
-    // CARTA DIÁRIA COM DESTAQUE
+    // CARTA DIÁRIA
     const loveMessages = [
       "Seu sorriso ilumina até os dias mais escuros.",
       "Você é a razão do meu coração bater mais forte.",
