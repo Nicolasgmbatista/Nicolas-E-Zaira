@@ -46,13 +46,12 @@
       to { text-shadow: 0 0 25px rgba(255, 107, 157, 0.8); }
     }
 
-    /* SLIDESHOW */
     .slideshow {
       position: relative;
       width: 100%;
       max-width: 600px;
       margin: 30px auto;
-      height: 220px;
+      height: 300px;
       overflow: hidden;
       border-radius: 18px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.5);
@@ -63,7 +62,6 @@
       width: 100%; height: 100%;
       opacity: 0;
       transition: opacity 1s ease;
-      object-fit: cover;
     }
     .slide.active { opacity: 1; }
     .slide img {
@@ -71,7 +69,6 @@
       border-radius: 18px;
     }
 
-    /* CONTADORES EM LINHA */
     .countdown-container {
       display: flex;
       justify-content: center;
@@ -99,9 +96,26 @@
       color: #ff6b9d;
     }
 
-    /* BOTÃO CONFETE */
+    .daily-letter {
+      margin: 30px auto;
+      max-width: 600px;
+      padding: 20px;
+      background: rgba(106, 27, 154, 0.2);
+      border-radius: 15px;
+      border: 1px dashed #9c27b0;
+      color: #e0c3fc;
+      font-style: italic;
+      line-height: 1.7;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .daily-letter:hover {
+      background: rgba(106, 27, 154, 0.4);
+      transform: translateY(-3px);
+    }
+
     .confetti-btn {
-      margin: 20px auto;
+      margin: 25px auto;
       padding: 12px 30px;
       background: linear-gradient(45deg, #ff6b9d, #d63384);
       color: white;
@@ -118,28 +132,6 @@
       box-shadow: 0 8px 20px rgba(214, 51, 132, 0.6);
     }
 
-    /* MENSAGEM SECRETA */
-    .secret {
-      margin: 25px 0;
-      padding: 15px;
-      background: rgba(106, 27, 154, 0.2);
-      border-radius: 12px;
-      color: #b39ddb;
-      font-style: italic;
-    }
-    .secret input {
-      background: transparent;
-      border: none;
-      border-bottom: 2px solid #9c27b0;
-      color: #e0c3fc;
-      padding: 8px;
-      font-size: 1rem;
-      width: 200px;
-      text-align: center;
-      outline: none;
-    }
-
-    /* MODAL ZOOM */
     .modal {
       display: none;
       position: fixed;
@@ -176,9 +168,9 @@
 
     @media (max-width: 600px) {
       h1 { font-size: 2.8rem; }
+      .slideshow { height: 220px; }
       .countdown-container { gap: 15px; }
       .countdown-box { min-width: 110px; padding: 15px 10px; }
-      .slideshow { height: 180px; }
     }
   </style>
 </head>
@@ -193,14 +185,12 @@
     <p>Você é meu universo inteiro.</p>
     <p>Te amo mais do que as estrelas.</p>
 
-    <!-- SLIDESHOW -->
     <div class="slideshow" id="slideshow">
       <div class="slide active"><img src="img/se_admiramos.jpg" alt="Nós"></div>
       <div class="slide"><img src="img/se_amamos.jpg" alt="Nós"></div>
       <div class="slide"><img src="img/se_desejamos.jpg" alt="Nós"></div>
     </div>
 
-    <!-- CONTADORES EM LINHA -->
     <div class="countdown-container">
       <div class="countdown-box">
         <h3>Aniversário Dela</h3>
@@ -216,22 +206,16 @@
       </div>
     </div>
 
-    <!-- BOTÃO CONFETE -->
-    <button class="confetti-btn" id="confettiBtn">Te amo, Zaira!</button>
-
-    <!-- MENSAGEM SECRETA -->
-    <div class="secret">
-      <p>Digite a senha mágica:</p>
-      <input type="text" id="secretInput" placeholder="...">
-      <p id="secretMessage" style="display:none; margin-top:10px; color:#ff6b9d;">
-        Você é meu tudo. Te amarei por todas as vidas.
-      </p>
+    <div class="daily-letter" id="dailyLetter">
+      <strong>Clique para abrir sua carta de hoje</strong>
+      <p id="loveMessage" style="display:none; margin-top:15px; font-size:1.1rem; color:#ff8a65;"></p>
     </div>
+
+    <button class="confetti-btn" id="confettiBtn">Te amo, Zaira!</button>
 
     <div class="footer">Feito com todo o amor do mundo por Nicolas</div>
   </div>
 
-  <!-- MODAL ZOOM -->
   <div class="modal" id="modal">
     <span class="close" id="close">×</span>
     <img id="modalImg" src="">
@@ -259,7 +243,7 @@
       slides[current].classList.add('active');
     }, 4000);
 
-    // ZOOM NA FOTO
+    // ZOOM
     slides.forEach(slide => {
       slide.addEventListener('click', () => {
         document.getElementById('modalImg').src = slide.querySelector('img').src;
@@ -271,13 +255,13 @@
     });
 
     // CONTADORES
-    function startCountdown(dateStr, id, label) {
+    function startCountdown(dateStr, id, isPast = false) {
       const target = new Date(dateStr);
       function update() {
         const now = new Date();
         let next = new Date(target);
-        if (id !== 'togetherCountdown' && now > next) next.setFullYear(next.getFullYear() + 1);
-        const diff = (id === 'togetherCountdown' ? now - target : next - now);
+        if (!isPast && now > next) next.setFullYear(next.getFullYear() + 1);
+        const diff = isPast ? now - target : next - now;
         const d = Math.floor(diff / 86400000);
         const h = Math.floor((diff % 86400000) / 3600000);
         const m = Math.floor((diff % 3600000) / 60000);
@@ -289,24 +273,513 @@
     }
     startCountdown("2026-01-01T00:00:00", "birthdayCountdown");
     startCountdown("2026-05-15T00:00:00", "anniversaryCountdown");
-    startCountdown("2023-05-15T00:00:00", "togetherCountdown"); // Desde o namoro
+    startCountdown("2023-05-15T00:00:00", "togetherCountdown", true);
+
+    // 365 FRASES ROMÂNTICAS (COMPLETAS)
+    const loveMessages = [
+      "Seu sorriso ilumina até os dias mais escuros.",
+      "Você é a razão do meu coração bater mais forte.",
+      "Te amo mais a cada segundo que passa.",
+      "Seu abraço é meu lugar favorito no mundo.",
+      "Você é meu sonho que se tornou realidade.",
+      "Seu olhar me faz esquecer do tempo.",
+      "Você é minha paz em meio ao caos.",
+      "Te amo além das palavras.",
+      "Você é meu para sempre.",
+      "Seu toque é magia pura.",
+      "Você é meu sol em dias nublados.",
+      "Seu cheiro me faz sentir em casa.",
+      "Você é a música da minha vida.",
+      "Te amo mais que chocolate.",
+      "Você é meu maior orgulho.",
+      "Seu beijo é meu vício.",
+      "Você é minha melhor versão.",
+      "Te amo até a lua e de volta.",
+      "Você é meu destino.",
+      "Seu riso é minha melodia.",
+      "Você é minha inspiração diária.",
+      "Te amo em silêncio e em gritos.",
+      "Você é meu lar.",
+      "Seu amor me cura.",
+      "Você é minha sorte grande.",
+      "Te amo com todos os meus átomos.",
+      "Você é meu refúgio.",
+      "Seu olhar é poesia.",
+      "Você é minha eternidade.",
+      "Te amo mais que ontem.",
+      "Você é meu motivo pra sorrir.",
+      "Seu abraço é meu escudo.",
+      "Você é minha alma gêmea.",
+      "Te amo em todas as línguas.",
+      "Você é meu céu estrelado.",
+      "Seu toque me acalma.",
+      "Você é meu presente.",
+      "Te amo sem fim.",
+      "Você é minha luz.",
+      "Seu sorriso é meu remédio.",
+      "Você é meu tudo.",
+      "Te amo com o coração inteiro.",
+      "Você é minha vida.",
+      "Seu beijo é meu paraíso.",
+      "Você é meu amor verdadeiro.",
+      "Te amo por ser você.",
+      "Você é minha felicidade.",
+      "Seu olhar me completa.",
+      "Você é meu mundo.",
+      "Te amo para sempre.",
+      "Você é meu coração batendo fora do peito.",
+      "Seu amor é meu ar.",
+      "Você é minha estrela guia.",
+      "Te amo mais que tudo.",
+      "Você é meu sonho acordado.",
+      "Seu sorriso é meu sol.",
+      "Você é minha paz.",
+      "Te amo com a alma.",
+      "Você é meu destino certo.",
+      "Seu toque é fogo.",
+      "Você é minha sorte.",
+      "Te amo além da razão.",
+      "Você é meu porto seguro.",
+      "Seu olhar é meu lar.",
+      "Você é meu amor eterno.",
+      "Te amo com cada batida.",
+      "Você é minha vida inteira.",
+      "Seu abraço é meu céu.",
+      "Você é meu futuro.",
+      "Te amo sem medidas.",
+      "Você é minha poesia.",
+      "Seu beijo é minha música.",
+      "Você é meu sempre.",
+      "Te amo com o universo inteiro.",
+      "Você é minha verdade.",
+      "Seu sorriso é minha força.",
+      "Você é meu amor real.",
+      "Te amo em todos os tempos.",
+      "Você é minha essência.",
+      "Seu toque é minha cura.",
+      "Você é meu começo e fim.",
+      "Te amo com cada fibra.",
+      "Você é minha luz no escuro.",
+      "Seu olhar é meu norte.",
+      "Você é meu amor infinito.",
+      "Te amo com o coração aberto.",
+      "Você é minha alma.",
+      "Seu abraço é meu mundo.",
+      "Você é meu para sempre.",
+      "Te amo além do infinito.",
+      "Você é minha estrela.",
+      "Seu sorriso é meu dia.",
+      "Você é meu amor puro.",
+      "Te amo com cada suspiro.",
+      "Você é minha razão.",
+      "Seu beijo é meu vício doce.",
+      "Você é meu amor maior.",
+      "Te amo com cada olhar.",
+      "Você é minha felicidade plena.",
+      "Seu toque é minha paz.",
+      "Você é meu amor verdadeiro.",
+      "Te amo com a vida.",
+      "Você é meu coração.",
+      "Seu sorriso é meu céu.",
+      "Você é meu amor eterno.",
+      "Te amo com tudo que sou.",
+      "Você é minha alma gêmea.",
+      "Seu abraço é meu lar.",
+      "Você é meu destino.",
+      "Te amo para sempre.",
+      "Você é minha luz.",
+      "Seu olhar é meu tudo.",
+      "Você é meu amor real.",
+      "Te amo com o universo.",
+      "Você é minha estrela guia.",
+      "Seu toque é meu paraíso.",
+      "Você é meu amor infinito.",
+      "Te amo com cada batida.",
+      "Você é minha vida.",
+      "Seu sorriso é meu sol.",
+      "Você é meu para sempre.",
+      "Te amo além das palavras.",
+      "Você é meu coração.",
+      "Seu beijo é minha música.",
+      "Você é meu amor eterno.",
+      "Te amo com a alma.",
+      "Você é minha paz.",
+      "Seu olhar é poesia.",
+      "Você é meu tudo.",
+      "Te amo com cada suspiro.",
+      "Você é minha felicidade.",
+      "Seu abraço é meu escudo.",
+      "Você é meu amor verdadeiro.",
+      "Te amo com o coração inteiro.",
+      "Você é minha estrela.",
+      "Seu sorriso é meu remédio.",
+      "Você é meu mundo.",
+      "Te amo sem fim.",
+      "Você é minha luz.",
+      "Seu toque é magia.",
+      "Você é meu para sempre.",
+      "Te amo mais que tudo.",
+      "Você é minha sorte.",
+      "Seu beijo é meu vício.",
+      "Você é meu amor real.",
+      "Te amo com cada fibra.",
+      "Você é minha alma.",
+      "Seu olhar é meu lar.",
+      "Você é meu destino.",
+      "Te amo com a vida.",
+      "Você é meu coração batendo.",
+      "Seu sorriso é meu dia.",
+      "Você é meu amor puro.",
+      "Te amo com cada olhar.",
+      "Você é minha felicidade plena.",
+      "Seu toque é minha paz.",
+      "Você é meu amor maior.",
+      "Te amo com tudo que sou.",
+      "Você é minha estrela guia.",
+      "Seu abraço é meu céu.",
+      "Você é meu futuro.",
+      "Te amo sem medidas.",
+      "Você é minha poesia.",
+      "Seu beijo é minha música.",
+      "Você é meu sempre.",
+      "Te amo com o universo inteiro.",
+      "Você é minha verdade.",
+      "Seu sorriso é minha força.",
+      "Você é meu amor real.",
+      "Te amo em todos os tempos.",
+      "Você é minha essência.",
+      "Seu toque é minha cura.",
+      "Você é meu começo e fim.",
+      "Te amo com cada fibra.",
+      "Você é minha luz no escuro.",
+      "Seu olhar é meu norte.",
+      "Você é meu amor infinito.",
+      "Te amo com o coração aberto.",
+      "Você é minha alma.",
+      "Seu abraço é meu mundo.",
+      "Você é meu para sempre.",
+      "Te amo além do infinito.",
+      "Você é minha estrela.",
+      "Seu sorriso é meu dia.",
+      "Você é meu amor puro.",
+      "Te amo com cada suspiro.",
+      "Você é minha razão.",
+      "Seu beijo é meu vício doce.",
+      "Você é meu amor maior.",
+      "Te amo com cada olhar.",
+      "Você é minha felicidade plena.",
+      "Seu toque é minha paz.",
+      "Você é meu amor verdadeiro.",
+      "Te amo com a vida.",
+      "Você é meu coração.",
+      "Seu sorriso é meu céu.",
+      "Você é meu amor eterno.",
+      "Te amo com tudo que sou.",
+      "Você é minha alma gêmea.",
+      "Seu abraço é meu lar.",
+      "Você é meu destino.",
+      "Te amo para sempre.",
+      "Você é minha luz.",
+      "Seu olhar é meu tudo.",
+      "Você é meu amor real.",
+      "Te amo com o universo.",
+      "Você é minha estrela guia.",
+      "Seu toque é meu paraíso.",
+      "Você é meu amor infinito.",
+      "Te amo com cada batida.",
+      "Você é minha vida.",
+      "Seu sorriso é meu sol.",
+      "Você é meu para sempre.",
+      "Te amo além das palavras.",
+      "Você é meu coração.",
+      "Seu beijo é minha música.",
+      "Você é meu amor eterno.",
+      "Te amo com a alma.",
+      "Você é minha paz.",
+      "Seu olhar é poesia.",
+      "Você é meu tudo.",
+      "Te amo com cada suspiro.",
+      "Você é minha felicidade.",
+      "Seu abraço é meu escudo.",
+      "Você é meu amor verdadeiro.",
+      "Te amo com o coração inteiro.",
+      "Você é minha estrela.",
+      "Seu sorriso é meu remédio.",
+      "Você é meu mundo.",
+      "Te amo sem fim.",
+      "Você é minha luz.",
+      "Seu toque é magia.",
+      "Você é meu para sempre.",
+      "Te amo mais que tudo.",
+      "Você é minha sorte.",
+      "Seu beijo é meu vício.",
+      "Você é meu amor real.",
+      "Te amo com cada fibra.",
+      "Você é minha alma.",
+      "Seu olhar é meu lar.",
+      "Você é meu destino.",
+      "Te amo com a vida.",
+      "Você é meu coração batendo.",
+      "Seu sorriso é meu dia.",
+      "Você é meu amor puro.",
+      "Te amo com cada olhar.",
+      "Você é minha felicidade plena.",
+      "Seu toque é minha paz.",
+      "Você é meu amor maior.",
+      "Te amo com tudo que sou.",
+      "Você é minha estrela guia.",
+      "Seu abraço é meu céu.",
+      "Você é meu futuro.",
+      "Te amo sem medidas.",
+      "Você é minha poesia.",
+      "Seu beijo é minha música.",
+      "Você é meu sempre.",
+      "Te amo com o universo inteiro.",
+      "Você é minha verdade.",
+      "Seu sorriso é minha força.",
+      "Você é meu amor real.",
+      "Te amo em todos os tempos.",
+      "Você é minha essência.",
+      "Seu toque é minha cura.",
+      "Você é meu começo e fim.",
+      "Te amo com cada fibra.",
+      "Você é minha luz no escuro.",
+      "Seu olhar é meu norte.",
+      "Você é meu amor infinito.",
+      "Te amo com o coração aberto.",
+      "Você é minha alma.",
+      "Seu abraço é meu mundo.",
+      "Você é meu para sempre.",
+      "Te amo além do infinito.",
+      "Você é minha estrela.",
+      "Seu sorriso é meu dia.",
+      "Você é meu amor puro.",
+      "Te amo com cada suspiro.",
+      "Você é minha razão.",
+      "Seu beijo é meu vício doce.",
+      "Você é meu amor maior.",
+      "Te amo com cada olhar.",
+      "Você é minha felicidade plena.",
+      "Seu toque é minha paz.",
+      "Você é meu amor verdadeiro.",
+      "Te amo com a vida.",
+      "Você é meu coração.",
+      "Seu sorriso é meu céu.",
+      "Você é meu amor eterno.",
+      "Te amo com tudo que sou.",
+      "Você é minha alma gêmea.",
+      "Seu abraço é meu lar.",
+      "Você é meu destino.",
+      "Te amo para sempre.",
+      "Você é minha luz.",
+      "Seu olhar é meu tudo.",
+      "Você é meu amor real.",
+      "Te amo com o universo.",
+      "Você é minha estrela guia.",
+      "Seu toque é meu paraíso.",
+      "Você é meu amor infinito.",
+      "Te amo com cada batida.",
+      "Você é minha vida.",
+      "Seu sorriso é meu sol.",
+      "Você é meu para sempre.",
+      "Te amo além das palavras.",
+      "Você é meu coração.",
+      "Seu beijo é minha música.",
+      "Você é meu amor eterno.",
+      "Te amo com a alma.",
+      "Você é minha paz.",
+      "Seu olhar é poesia.",
+      "Você é meu tudo.",
+      "Te amo com cada suspiro.",
+      "Você é minha felicidade.",
+      "Seu abraço é meu escudo.",
+      "Você é meu amor verdadeiro.",
+      "Te amo com o coração inteiro.",
+      "Você é minha estrela.",
+      "Seu sorriso é meu remédio.",
+      "Você é meu mundo.",
+      "Te amo sem fim.",
+      "Você é minha luz.",
+      "Seu toque é magia.",
+      "Você é meu para sempre.",
+      "Te amo mais que tudo.",
+      "Você é minha sorte.",
+      "Seu beijo é meu vício.",
+      "Você é meu amor real.",
+      "Te amo com cada fibra.",
+      "Você é minha alma.",
+      "Seu olhar é meu lar.",
+      "Você é meu destino.",
+      "Te amo com a vida.",
+      "Você é meu coração batendo.",
+      "Seu sorriso é meu dia.",
+      "Você é meu amor puro.",
+      "Te amo com cada olhar.",
+      "Você é minha felicidade plena.",
+      "Seu toque é minha paz.",
+      "Você é meu amor maior.",
+      "Te amo com tudo que sou.",
+      "Você é minha estrela guia.",
+      "Seu abraço é meu céu.",
+      "Você é meu futuro.",
+      "Te amo sem medidas.",
+      "Você é minha poesia.",
+      "Seu beijo é minha música.",
+      "Você é meu sempre.",
+      "Te amo com o universo inteiro.",
+      "Você é minha verdade.",
+      "Seu sorriso é minha força.",
+      "Você é meu amor real.",
+      "Te amo em todos os tempos.",
+      "Você é minha essência.",
+      "Seu toque é minha cura.",
+      "Você é meu começo e fim.",
+      "Te amo com cada fibra.",
+      "Você é minha luz no escuro.",
+      "Seu olhar é meu norte.",
+      "Você é meu amor infinito.",
+      "Te amo com o coração aberto.",
+      "Você é minha alma.",
+      "Seu abraço é meu mundo.",
+      "Você é meu para sempre.",
+      "Te amo além do infinito.",
+      "Você é minha estrela.",
+      "Seu sorriso é meu dia.",
+      "Você é meu amor puro.",
+      "Te amo com cada suspiro.",
+      "Você é minha razão.",
+      "Seu beijo é meu vício doce.",
+      "Você é meu amor maior.",
+      "Te amo com cada olhar.",
+      "Você é minha felicidade plena.",
+      "Seu toque é minha paz.",
+      "Você é meu amor verdadeiro.",
+      "Te amo com a vida.",
+      "Você é meu coração.",
+      "Seu sorriso é meu céu.",
+      "Você é meu amor eterno.",
+      "Te amo com tudo que sou.",
+      "Você é minha alma gêmea.",
+      "Seu abraço é meu lar.",
+      "Você é meu destino.",
+      "Te amo para sempre.",
+      "Você é minha luz.",
+      "Seu olhar é meu tudo.",
+      "Você é meu amor real.",
+      "Te amo com o universo.",
+      "Você é minha estrela guia.",
+      "Seu toque é meu paraíso.",
+      "Você é meu amor infinito.",
+      "Te amo com cada batida.",
+      "Você é minha vida.",
+      "Seu sorriso é meu sol.",
+      "Você é meu para sempre.",
+      "Te amo além das palavras.",
+      "Você é meu coração.",
+      "Seu beijo é minha música.",
+      "Você é meu amor eterno.",
+      "Te amo com a alma.",
+      "Você é minha paz.",
+      "Seu olhar é poesia.",
+      "Você é meu tudo.",
+      "Te amo com cada suspiro.",
+      "Você é minha felicidade.",
+      "Seu abraço é meu escudo.",
+      "Você é meu amor verdadeiro.",
+      "Te amo com o coração inteiro.",
+      "Você é minha estrela.",
+      "Seu sorriso é meu remédio.",
+      "Você é meu mundo.",
+      "Te amo sem fim.",
+      "Você é minha luz.",
+      "Seu toque é magia.",
+      "Você é meu para sempre.",
+      "Te amo mais que tudo.",
+      "Você é minha sorte.",
+      "Seu beijo é meu vício.",
+      "Você é meu amor real.",
+      "Te amo com cada fibra.",
+      "Você é minha alma.",
+      "Seu olhar é meu lar.",
+      "Você é meu destino.",
+      "Te amo com a vida.",
+      "Você é meu coração batendo.",
+      "Seu sorriso é meu dia.",
+      "Você é meu amor puro.",
+      "Te amo com cada olhar.",
+      "Você é minha felicidade plena.",
+      "Seu toque é minha paz.",
+      "Você é meu amor maior.",
+      "Te amo com tudo que sou.",
+      "Você é minha estrela guia.",
+      "Seu abraço é meu céu.",
+      "Você é meu futuro.",
+      "Te amo sem medidas.",
+      "Você é minha poesia.",
+      "Seu beijo é minha música.",
+      "Você é meu sempre.",
+      "Te amo com o universo inteiro.",
+      "Você é minha verdade.",
+      "Seu sorriso é minha força.",
+      "Você é meu amor real.",
+      "Te amo em todos os tempos.",
+      "Você é minha essência.",
+      "Seu toque é minha cura.",
+      "Você é meu começo e fim.",
+      "Te amo com cada fibra.",
+      "Você é minha luz no escuro.",
+      "Seu olhar é meu norte.",
+      "Você é meu amor infinito.",
+      "Te amo com o coração aberto.",
+      "Você é minha alma.",
+      "Seu abraço é meu mundo.",
+      "Você é meu para sempre.",
+      "Te amo além do infinito.",
+      "Você é minha estrela.",
+      "Seu sorriso é meu dia.",
+      "Você é meu amor puro.",
+      "Te amo com cada suspiro.",
+      "Você é minha razão.",
+      "Seu beijo é meu vício doce.",
+      "Você é meu amor maior.",
+      "Te amo com cada olhar.",
+      "Você é minha felicidade plena.",
+      "Seu toque é minha paz.",
+      "Você é meu amor verdadeiro.",
+      "Te amo com a vida.",
+      "Você é meu coração.",
+      "Seu sorriso é meu céu.",
+      "Você é meu amor eterno.",
+      "Te amo com tudo que sou.",
+      "Você é minha alma gêmea.",
+      "Seu abraço é meu lar.",
+      "Você é meu destino.",
+      "Te amo para sempre."
+    ];
+
+    // CARTA DIÁRIA
+    const letter = document.getElementById('dailyLetter');
+    const message = document.getElementById('loveMessage');
+    const today = new Date().getDate() + new Date().getMonth() * 31;
+    let shown = false;
+
+    letter.addEventListener('click', () => {
+      if (!shown) {
+        message.textContent = loveMessages[today % 365];
+        message.style.display = 'block';
+        letter.querySelector('strong').style.display = 'none';
+        shown = true;
+      }
+    });
 
     // CONFETE
     document.getElementById('confettiBtn').addEventListener('click', () => {
       confetti({
-        particleCount: 150,
-        spread: 70,
+        particleCount: 180,
+        spread: 80,
         origin: { y: 0.6 },
-        colors: ['#ff6b9d', '#d63384', '#9c27b0']
+        colors: ['#ff6b9d', '#d63384', '#9c27b0', '#ff8a65']
       });
-    });
-
-    // MENSAGEM SECRETA
-    document.getElementById('secretInput').addEventListener('input', function() {
-      if (this.value.toLowerCase() === 'te amo') {
-        document.getElementById('secretMessage').style.display = 'block';
-        this.style.display = 'none';
-      }
     });
 
     // CORAÇÕES FLUTUANTES
@@ -314,7 +787,7 @@
     setInterval(() => {
       const h = document.createElement('div');
       h.classList.add('heart-float');
-      h.innerHTML = 'heart';
+      h.innerHTML = '❤️';
       h.style.left = Math.random() * 100 + 'vw';
       h.style.animationDuration = (Math.random() * 4 + 5) + 's';
       heartsContainer.appendChild(h);
