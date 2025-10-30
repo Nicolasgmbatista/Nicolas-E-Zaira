@@ -147,7 +147,7 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* VALE GOMINHA! (DIA 15) */
+    /* VALE GOMINHA! */
     .gominha-container {
       margin: 30px auto;
       max-width: 600px;
@@ -345,14 +345,14 @@
       font-size: 1rem;
     }
 
-    /* CORAÇÕES FLUTUANTES — SÓ SÍMBOLO Heart */
+    /* CORAÇÕES FLUTUANTES — SÓ O SÍMBOLO Heart */
     .floating-hearts { 
       position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
       pointer-events: none; overflow: hidden; z-index: 1; 
     }
     .heart-float { 
       position: absolute; 
-      color: rgba(255, 107, 157, 0.25); 
+      color: rgba(255, 107, 157, 0.3); 
       animation: float 7s infinite ease-in-out; 
       opacity: 0.8;
     }
@@ -391,7 +391,7 @@
 
   <div class="play-overlay" id="playOverlay">Toque para ouvir nossa música</div>
 
-  <!-- CORAÇÕES FLUTUANTES (SÓ SÍMBOLO Heart) -->
+  <!-- CORAÇÕES FLUTUANTES — SÓ O SÍMBOLO Heart -->
   <div class="floating-hearts" id="hearts"></div>
 
   <div class="container">
@@ -432,7 +432,7 @@
 
     <!-- VALE GOMINHA! -->
     <div class="gominha-container locked" id="gominhaBox">
-      <div class="lock-icon">Resgate Vale Gominha Em:</div>
+      <div class="lock-icon">Resgate daqui:</div>
       <div class="time" id="gominhaCountdown">0d 0h 0m 0s</div>
       <div class="ready-text" id="readyText">Resgate seu prêmio AMOR!</div>
       <div class="ticket" id="gominhaTicket">
@@ -502,21 +502,21 @@
       }
     });
 
-    // CORAÇÕES FLUTUANTES — SÓ SÍMBOLO Heart + MAIS FREQUENTES
+    // CORAÇÕES FLUTUANTES — SÓ O SÍMBOLO Heart + MUITOS!
     const heartsContainer = document.getElementById('hearts');
     const sizes = ['1rem', '1.3rem', '1.6rem', '2rem'];
     
     setInterval(() => {
       const h = document.createElement('div');
       h.classList.add('heart-float');
-      h.innerHTML = 'Heart';
+      h.innerHTML = 'Heart';  // SÓ O SÍMBOLO!
       h.style.left = Math.random() * 100 + 'vw';
       h.style.fontSize = sizes[Math.floor(Math.random() * sizes.length)];
       h.style.animationDuration = (Math.random() * 3 + 5) + 's';
       h.style.animationDelay = Math.random() * 2 + 's';
       heartsContainer.appendChild(h);
       setTimeout(() => h.remove(), 8000);
-    }, 800); // A cada 800ms = MUITO mais corações!
+    }, 800); // A cada 800ms = MUITO amor!
 
     // SLIDESHOW
     const slides = document.querySelectorAll('.slide');
