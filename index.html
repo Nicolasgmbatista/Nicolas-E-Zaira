@@ -233,7 +233,7 @@
       color: white; font-size: 1.6rem; font-weight: bold;
     }
 
-    /* CONTROLE DE MÚSICA COM DISCO GIRANDO */
+    /* CONTROLE DE MÚSICA COM ÍCONES || E TRIÂNGULO */
     .music-player {
       margin: 25px auto 15px;
       max-width: 600px;
@@ -289,13 +289,18 @@
     }
 
     .music-icon {
-      font-size: 1.8rem;
-      color: #ff6b9d;
+      width: 36px;
+      height: 36px;
+      background: rgba(255, 107, 157, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       cursor: pointer;
       transition: 0.3s;
-      padding: 8px;
-      border-radius: 50%;
-      background: rgba(255, 107, 157, 0.1);
+      font-size: 1.4rem;
+      color: #ff6b9d;
+      font-weight: bold;
     }
     .music-icon:hover {
       background: rgba(255, 107, 157, 0.3);
@@ -337,7 +342,7 @@
       .vinyl-container { width: 32px; height: 32px; }
       .vinyl { width: 32px; height: 32px; }
       .vinyl::before { width: 10px; height: 10px; }
-      .music-icon { font-size: 1.5rem; }
+      .music-icon { width: 32px; height: 32px; font-size: 1.2rem; }
       .music-title { font-size: 0.9rem; }
     }
   </style>
@@ -393,12 +398,12 @@
       </div>
     </div>
 
-    <!-- CONTROLE DE MÚSICA COM DISCO GIRANDO -->
+    <!-- CONTROLE DE MÚSICA: TRIÂNGULO E || -->
     <div class="music-player" id="musicPlayer">
       <div class="vinyl-container">
         <div class="vinyl" id="vinyl"></div>
       </div>
-      <span class="music-icon" id="musicToggle">Play</span>
+      <div class="music-icon" id="musicToggle">TRIÂNGULO</div>
       <span class="music-title">A Thousand Years – Christina Perri</span>
     </div>
 
@@ -417,7 +422,7 @@
   </audio>
 
   <script>
-    // AUTOPLAY + CONTROLE DE MÚSICA COM DISCO
+    // AUTOPLAY + CONTROLE DE MÚSICA COM ÍCONES
     const overlay = document.getElementById('playOverlay');
     const music = document.getElementById('bgMusic');
     const musicToggle = document.getElementById('musicToggle');
@@ -433,14 +438,14 @@
 
     function startMusic() {
       isPlaying = true;
-      musicToggle.innerHTML = 'Pause';
+      musicToggle.innerHTML = '||';
       vinyl.classList.add('spinning');
       musicPlayer.style.background = 'rgba(106, 27, 154, 0.5)';
     }
 
     function stopMusic() {
       isPlaying = false;
-      musicToggle.innerHTML = 'Play';
+      musicToggle.innerHTML = 'TRIÂNGULO';
       vinyl.classList.remove('spinning');
       musicPlayer.style.background = 'rgba(106, 27, 154, 0.3)';
     }
