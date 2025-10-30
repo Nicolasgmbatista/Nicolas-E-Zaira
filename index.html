@@ -442,7 +442,7 @@
         document.querySelector('.lock-icon').style.display = 'none';
         readyText.style.display = 'block';
       } else {
-        gominhaCountdown.innerHTML = `Faltam ${d}d ${h}h<br>${m}m ${s}s`;
+        gominhaCountdown.innerHTML = `${d}d ${h}h ${m}m ${s}s`;
         setTimeout(updateGominha, 1000);
       }
     }
