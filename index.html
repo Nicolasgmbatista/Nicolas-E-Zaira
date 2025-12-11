@@ -140,16 +140,16 @@
 
   <div class="modal" id="modal"><span class="close" id="close">X</span><img id="modalImg" src=""></div>
 
-  <!-- MINI-GAME MODAL -->
+  <!-- MINI-GAME -->
   <div id="miniGameModal">
     <div id="gameBox">
       <button id="closeGame">×</button>
       <div id="gameHud">
         <div id="vidas">Vidas: ❤️❤️❤️❤️❤️</div>
-        <div id="score">Salvos: 0 😻</div>
+        <div id="score">Salvos: 0 Cat</div>
       </div>
       <div id="gameArea"></div>
-      <button id="restartGame">Jogar novamente 😻</button>
+      <button id="restartGame">Jogar novamente Cat</button>
     </div>
   </div>
 
@@ -157,7 +157,7 @@
   <audio id="meowSound" src="https://www.soundjay.com/buttons/cat-meow-1.mp3"></audio>
 
   <script>
-    // === SEU CÓDIGO ORIGINAL 100% INTACTO ===
+    // SEU CÓDIGO ORIGINAL (música, corações, slideshow, contadores, carta diária, vale gominha, confetti)
     const overlay=document.getElementById('playOverlay');
     const music=document.getElementById('bgMusic');
     const musicToggle=document.getElementById('musicToggle');
@@ -170,7 +170,7 @@
     musicToggle.addEventListener('click',()=>{isPlaying?music.pause():music.play().catch(()=>{});stopMusic();startMusic();isPlaying=!isPlaying;});
 
     const hearts=document.getElementById('hearts');
-    function createHeart(){const h=document.createElement('div');h.classList.add('heart-float');h.innerHTML='❤️';h.style.left=Math.random()*100+'vw';h.style.fontSize=(Math.random()*1.5+2)+'rem';h.style.animationDuration=(Math.random()*3+5)+'s';hearts.appendChild(h);setTimeout(()=>h.remove(),10000);}
+    function createHeart(){const h=document.createElement('div');h.classList.add('heart-float');h.innerHTML='Heart';h.style.left=Math.random()*100+'vw';h.style.fontSize=(Math.random()*1.5+2)+'rem';h.style.animationDuration=(Math.random()*3+5)+'s';hearts.appendChild(h);setTimeout(()=>h.remove(),10000);}
     setInterval(createHeart,500);
 
     const slides=document.querySelectorAll('.slide');let current=0;setInterval(()=>{slides[current].classList.remove('active');current=(current+1)%slides.length;slides[current].classList.add('active');},4000);
@@ -182,7 +182,7 @@
     startCountdown("2026-05-15T00:00:00","anniversaryCountdown");
     startCountdown("2023-05-15T00:00:00","togetherCountdown",true);
 
-    const loveMessages = [/* todas as suas 200+ frases aqui - estão todas no código original */];
+    const loveMessages = [/* todas as suas 200+ frases aqui — estão todas no código original */];
     const letter=document.getElementById('dailyLetter');
     const message=document.getElementById('loveMessage');
     const today=new Date().getDate()+new Date().getMonth()*31;
@@ -202,39 +202,55 @@
     updateGominha();
     document.getElementById('confettiBtn').addEventListener('click',()=>{confetti({particleCount:180,spread:80,origin:{y:0.6},colors:['#ff6b9d','#d63384','#9c27b0','#ff8a65']});});
 
-    // === MINI-GAME FINAL - 100% CORRIGIDO ===
-    document.getElementById('btnMiniGame').onclick = () => {
-      document.getElementById('miniGameModal').style.display = 'flex';
-      startMiniGame();
-    };
-    document.getElementById('closeGame').onclick = () => document.getElementById('miniGameModal').style.display = 'none';
+    // MINI-GAME FINAL — TUDO FUNCIONANDO
+    document.getElementById('btnMiniGame').onclick=()=>{document.getElementById('miniGameModal').style.display='flex';startMiniGame();};
+    document.getElementById('closeGame').onclick=()=>{document.getElementById('miniGameModal').style.display='none';};
 
-    function startMiniGame() {
-      const area = document.getElementById('gameArea');
-      const score = document.getElementById('score');
-      const vidas = document.getElementById('vidas');
-      const restart = document.getElementById('restartGame');
-      area.innerHTML = '';
-      let salvos = 0, lives = 5, ativo = true;
-      let gameInterval = null;
+    function startMiniGame(){
+      const area=document.getElementById('gameArea');
+      const score=document.getElementById('score');
+      const vidas=document.getElementById('vidas');
+      const restart=document.getElementById('restartGame');
+      area.innerHTML='';
+      let salvos=0,lives=5,ativo=true;
+      let gameInterval=null;
+
+      const frases=[
+        {qtd:10,txt:"10 salvos… ainda tá fácil né?"},
+        {qtd:50,txt:"50!! Agora vai esquentar"},
+        {qtd:80,txt:"80… você é boa mesmo hein amor"},
+        {qtd:100,txt:"100 GATINHOS!! Tô impressionado"},
+        {qtd:130,txt:"130… tá voando literalmente"},
+        {qtd:160,txt:"160! Falta pouco pra me deixar sem palavras"},
+        {qtd:190,txt:"190!! QUASE LÁ MINHA CAMPEÃ!!!"},
+        {qtd:200,txt:"200 GATINHOS SALVOS!!!\nVOCÊ É INCRÍVEL DEMAIS!!\nA verdadeira Heroína dos Gatos e do meu coração.\nTe amo mais que tudo no universo, minha vida eterna."}
+      ];
+
+      function msg(t){
+        const m=document.createElement('div');
+        m.style.cssText='position:absolute;top:30%;left:50%;transform:translateX(-50%);font-size:42px;color:#ff1493;font-weight:bold;text-shadow:0 0 20px #fff;pointer-events:none;text-align:center;z-index:100;';
+        m.innerHTML=t.replace('\n','<br>');
+        area.appendChild(m);
+        setTimeout(()=>m.remove(),3000);
+      }
 
       function update(){
-        score.innerHTML = `Salvos: ${salvos} 😻`;
-        vidas.innerHTML = `Vidas: ` + "❤️".repeat(lives);
+        score.innerHTML=`Salvos: ${salvos} Cat`;
+        vidas.innerHTML=`Vidas: `+"Heart".repeat(lives);
       }
 
       function novoGato(){
         if(!ativo) return;
-        const level = Math.floor(salvos/10);
-        let base = 7 - level*0.3;
-        base = Math.max(base, 2);
-        const dur = base + Math.random()*0.8;
+        const level=Math.floor(salvos/10);
+        let base=6.5-level*0.25;
+        base=Math.max(base,1.8);
+        const dur=base+Math.random()*0.7;
 
-        const gato = document.createElement('div');
-        const num = Math.floor(Math.random()*13)+1;
-        const leftPos = Math.random()*60 + 20;
+        const gato=document.createElement('div');
+        const num=Math.floor(Math.random()*13)+1;
+        const leftPos=Math.random()*60+20;
 
-        gato.style.cssText = `
+        gato.style.cssText=`
           position:absolute;
           width:280px;height:280px;
           left:${leftPos}%;top:-300px;
@@ -249,52 +265,54 @@
           user-select:none;
         `;
 
-        gato.onclick = (e) => {
-          e.preventDefault();
+        gato.onclick=e=>{
           e.stopPropagation();
-          if(gato.dataset.clicado) return;
-          gato.dataset.clicado = true;
+          if(gato.dataset.clicado)return;
+          gato.dataset.clicado=true;
           salvos++;
           update();
 
-          document.getElementById('meowSound').currentTime = 0;
+          document.getElementById('meowSound').currentTime=0;
           document.getElementById('meowSound').play();
 
-          for(let i=0; i<22; i++){
+          for(let i=0;i<22;i++){
             const h=document.createElement('div');
-            h.innerHTML = '❤️';
-            h.style.cssText = `position:absolute;font-size:50px;left:${gato.offsetLeft+140}px;top:${gato.offsetTop+140}px;pointer-events:none;`;
-            h.animate([{transform:'translateY(0)',opacity:1},{transform:'translateY(-400px) scale(0)',opacity:0}],{duration:1600}).onfinish = () => h.remove();
+            h.innerHTML='Heart';
+            h.style.cssText=`position:absolute;font-size:50px;left:${gato.offsetLeft+140}px;top:${gato.offsetTop+140}px;pointer-events:none;`;
+            h.animate([{transform:'translateY(0)',opacity:1},{transform:'translateY(-400px) scale(0)',opacity:0}],{duration:1600}).onfinish=()=>h.remove();
             area.appendChild(h);
           }
 
-          gato.style.transform = 'translateX(-50%) scale(1.4) rotate(30deg)';
-          setTimeout(() => gato.remove(), 400);
+          gato.style.transform='translateX(-50%) scale(1.4) rotate(30deg)';
+          setTimeout(()=>gato.remove(),400);
+
+          frases.forEach(f=>{if(f.qtd===salvos)msg(f.txt);});
+          if(salvos>=200){ativo=false;restart.style.display='block';msg(frases.find(f=>f.qtd===200).txt);}
         };
 
         area.appendChild(gato);
 
-        setTimeout(() => {
-          if(gato.parentNode && !gato.dataset.clicado) {
-            lives--; update(); gato.remove();
-            if(lives <= 0) { ativo = false; restart.style.display = 'block'; }
+        setTimeout(()=>{
+          if(gato.parentNode&&!gato.dataset.clicado){
+            lives--;update();gato.remove();
+            if(lives<=0){ativo=false;restart.style.display='block';}
           }
-        }, dur*1000 + 500);
+        },dur*1000+500);
       }
 
       function iniciaJogo(){
-        clearInterval(gameInterval);
-        const level = Math.floor(salvos/10);
-        let intervalo = 1800 - level*100;
-        intervalo = Math.max(intervalo, 800);
-        gameInterval = setInterval(novoGato, intervalo);
+        if(gameInterval) clearInterval(gameInterval);
+        const level=Math.floor(salvos/10);
+        let intervalo=1200 - level*80; // começa em ~1.2s e vai até ~400ms
+        intervalo=Math.max(intervalo,400);
+        gameInterval=setInterval(novoGato,intervalo);
       }
 
-      restart.onclick = () => {
-        salvos = 0; lives = 5; ativo = true;
+      restart.onclick=()=>{
+        salvos=0;lives=5;ativo=true;
         update();
-        restart.style.display = 'none';
-        area.innerHTML = '';
+        restart.style.display='none';
+        area.innerHTML='';
         iniciaJogo();
       };
 
