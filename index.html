@@ -749,7 +749,7 @@
 
         const gato = document.createElement('div');
         const num = Math.floor(Math.random()*13)+1;
-        gato.style.cssText = `position:absolute;width:200px;height:200px;left:${Math.random()*80+10}%;background:url('img/gato${num}.png') center/contain no-repeat;cursor:pointer;animation:cair ${dur}s linear forwards;`;
+        gato.style.cssText = `position:absolute;width:280px;height:280px;left:${Math.random()*80+10}%;background:url('img/gato${num}.png') center/contain no-repeat;cursor:pointer;animation:cair ${dur}s linear forwards;`;
 
         gato.onclick = () => {
           if (gato.dataset.ok) return;
