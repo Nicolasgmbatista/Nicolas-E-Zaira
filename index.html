@@ -16,7 +16,7 @@
     .slideshow{position:relative;width:100%;max-width:600px;margin:30px auto;height:450px;overflow:hidden;border-radius:18px;box-shadow:0 10px 30px rgba(0,0,0,.5);background:#000}
     .slide{position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;transition:opacity 1s ease}
     .slide.active{opacity:1}
-    .slide img{width:100%;height:100%;object-fit:contain;background:#000;border-radius:0;border-radius:18px;cursor:zoom-in}
+    .slide img{width:100%;height:100%;object-fit:contain;background:#000;border-radius:18px;cursor:zoom-in}
     .countdown-container{display:flex;justify-content:center;gap:25px;margin:35px 0;flex-wrap:wrap;overflow-x:auto}
     .countdown-box{background:rgba(106,27,154,.3);padding:18px 15px;border-radius:15px;min-width:130px;backdrop-filter:blur(5px);border:1px solid #9c27b0}
     .countdown-box h3{font-size:.9rem;color:#ff8a65;margin-bottom:8px}
@@ -24,7 +24,7 @@
     .love-note{margin:30px auto;max-width:600px;padding:25px;background:linear-gradient(135deg,rgba(106,27,154,.4),rgba(156,39,176,.3));border-radius:20px;border:2px solid #ff6b9d;color:#fff;font-style:italic;line-height:1.8;font-size:1.1rem;text-align:center;box-shadow:0 10px 25px rgba(255,107,157,.3);position:relative;overflow:hidden}
     .love-note::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:radial-gradient(circle at 50% 50%,rgba(255,107,157,.1),transparent 70%);pointer-events:none}
     .love-note strong{display:block;font-family:'Dancing Script',cursive;font-size:1.6rem;color:#ff6b9d;margin-bottom:12px;text-shadow:0 0 8px rgba(255,107,157,.6)}
-    .daily-letter{margin:30px auto;max-width:600px;padding:25px;background:linear-gradient(135deg,rgba(106,27,154,.4),rgba(156,39,176,.3));border-radius:20px;border:2px solid #ff6b9d;color:#fff;font-style:italic;line-height:1.8;cursor:pointer;transition:.4s;box-shadow:0 0 10px 25px rgba(255,107,157,.3);position:relative;overflow:hidden}
+    .daily-letter{margin:30px auto;max-width:600px;padding:25px;background:linear-gradient(135deg,rgba(106,27,154,.4),rgba(156,39,176,.3));border-radius:20px;border:2px solid #ff6b9d;color:#fff;font-style:italic;line-height:1.8;cursor:pointer;transition:.4s;box-shadow:0 10px 25px rgba(255,107,157,.3);position:relative;overflow:hidden}
     .daily-letter::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:radial-gradient(circle at 30% 30%,rgba(255,107,157,.1),transparent 70%);pointer-events:none}
     .daily-letter:hover{transform:translateY(-5px);box-shadow:0 15px 35px rgba(255,107,157,.5);border-color:#ff8a65}
     .daily-letter strong{font-size:1.3rem;color:#ff6b9d;font-family:'Dancing Script',cursive;display:block;margin-bottom:12px}
@@ -34,7 +34,7 @@
     .gominha-container:hover:not(.locked):not(.redeemed){transform:scale(1.03);box-shadow:0 12px 30px rgba(255,107,157,.5)}
     .gominha-container.locked,.gominha-container.redeemed{cursor:not-allowed;opacity:.7}
     .gominha-container .lock-icon{font-size:2.5rem;margin-bottom:8px}
-    .gominha-container .time{font-size:1.6rem;font-weight:bold;color:#ff6b9d;line-height:1.4;margin:8px 0;min-height:3em;display:flex;align-items:center;justify-content:center}
+    .time{font-size:1.6rem;font-weight:bold;color:#ff6b9d;line-height:1.4;margin:8px 0;min-height:3em;display:flex;align-items:center;justify-content:center}
     .gominha-container .ready-text{font-size:1.3rem;font-weight:bold;color:#ff6b9d;display:none;margin:10px 0}
     .gominha-container .ticket{display:none;background:linear-gradient(135deg,#ff9a9e,#fad0c4);color:#1a0b2e;padding:15px 20px;border-radius:12px;font-family:'Dancing Script',cursive;font-size:1.8rem;margin-top:10px;border:3px dashed #ff6b9d;animation:pulse 1.5s infinite;width:80%}
     @keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.05)}100%{transform:scale(1)}}
@@ -43,7 +43,7 @@
     .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.9);z-index:9999;align-items:center;justify-content:center;padding:20px}
     .modal img{max-width:90%;max-height:90%;border-radius:15px;box-shadow:0 0 30px rgba(255,107,157,.5)}
     .close{position:absolute;top:20px;right:30px;color:white;font-size:2rem;cursor:pointer}
-    .play-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);z-index:9999;cursor:pointer;display:flex;align-items:center;justify-content:center;color:white;font-size:1.6rem;font-weight:bold;transition:opacity .5s}
+    .play-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);z-index:9999;cursor:pointer;display:flex;align-items:center;justify-content:center;color:white;font-size:1.6rem;font-weight:bold}
     .music-player{margin:25px auto 15px;max-width:600px;padding:18px 25px;background:rgba(106,27,154,.3);border-radius:18px;border:1px dashed #9c27b0;display:flex;align-items:center;justify-content:center;gap:15px;color:#e0c3fc;font-size:1rem;backdrop-filter:blur(5px);transition:.3s;position:relative;overflow:hidden}
     .music-player:hover{background:rgba(106,27,154,.5);transform:translateY(-2px)}
     .vinyl-container,.vinyl{width:40px;height:40px}
@@ -139,16 +139,15 @@
 
   <div class="modal" id="modal"><span class="close" id="close">X</span><img id="modalImg" src=""></div>
 
-  <!-- MINI-GAME -->
   <div id="miniGameModal">
     <div id="gameBox">
       <button id="closeGame">×</button>
       <div id="gameHud">
-        <div id="vidas">Vidas: Heart Heart Heart Heart Heart</div>
-        <div id="score">Salvos: 0 Cat</div>
+        <div id="vidas">Vidas: ❤️❤️❤️❤️❤️</div>
+        <div id="score">Salvos: 0 😻</div>
       </div>
       <div id="gameArea"></div>
-      <button id="restartGame">Jogar novamente Cat</button>
+      <button id="restartGame">Jogar novamente 😻</button>
     </div>
   </div>
 
@@ -158,60 +157,37 @@
   <audio id="meowSound" preload="auto" src="https://www.soundjay.com/buttons/cat-meow-1.mp3"></audio>
 
   <script>
-    // === MÚSICA FUNCIONA NO PRIMEIRO TOQUE (corrigido) ===
-    const overlay = document.getElementById('playOverlay');
-    const music = document.getElementById('bgMusic');
-    const musicToggle = document.getElementById('musicToggle');
-    const vinyl = document.getElementById('vinyl');
-    const musicPlayer = document.getElementById('musicPlayer');
-    let unlocked = false;
+    // MÚSICA FUNCIONA NO PRIMEIRO TOQUE
+    const overlay=document.getElementById('playOverlay');
+    const music=document.getElementById('bgMusic');
+    const musicToggle=document.getElementById('musicToggle');
+    const vinyl=document.getElementById('vinyl');
+    const musicPlayer=document.getElementById('musicPlayer');
+    let unlocked=false;
 
-    overlay.addEventListener('click', () => {
-      music.play().then(() => {
-        overlay.style.opacity = '0';
-        setTimeout(() => overlay.style.display = 'none', 500);
-        musicToggle.innerHTML = '||';
-        vinyl.classList.add('spinning');
-        musicPlayer.style.background = 'rgba(106,27,154,0.5)';
-        unlocked = true;
-      }).catch(() => {});
-    });
+    overlay.addEventListener('click',()=>{music.play().then(()=>{overlay.style.opacity='0';setTimeout(()=>{overlay.style.display='none';},500);musicToggle.innerHTML='||';vinyl.classList.add('spinning');musicPlayer.style.background='rgba(106,27,154,0.5)';unlocked=true;}).catch(()=>{});});
 
-    musicToggle.addEventListener('click', () => {
-      if (!unlocked) return;
-      if (music.paused) {
-        music.play();
-        musicToggle.innerHTML = '||';
-        vinyl.classList.add('spinning');
-        musicPlayer.style.background = 'rgba(106,27,154,0.5)';
-      } else {
-        music.pause();
-        musicToggle.innerHTML = 'Play';
-        vinyl.classList.remove('spinning');
-        musicPlayer.style.background = 'rgba(106,27,154,0.3)';
-      }
-    });
+    musicToggle.addEventListener('click',()=>{if(!unlocked)return;if(music.paused){music.play();musicToggle.innerHTML='||';vinyl.classList.add('spinning');musicPlayer.style.background='rgba(106,27,154,0.5)';}else{music.pause();musicToggle.innerHTML='Play';vinyl.classList.remove('spinning');musicPlayer.style.background='rgba(106,27,154,0.3)';}});
 
-    // === CORAÇÕES FLUTUANTES ===
-    const hearts = document.getElementById('hearts');
-    function createHeart(){const h=document.createElement('div');h.classList.add('heart-float');h.innerHTML='Heart';h.style.left=Math.random()*100+'vw';h.style.fontSize=(Math.random()*1.5+2)+'rem';h.style.animationDuration=(Math.random()*3+5)+'s';hearts.appendChild(h);setTimeout(()=>h.remove(),10000);}
+    // CORAÇÕES FLUTUANTES
+    const hearts=document.getElementById('hearts');
+    function createHeart(){const h=document.createElement('div');h.classList.add('heart-float');h.innerHTML='❤️';h.style.left=Math.random()*100+'vw';h.style.fontSize=(Math.random()*1.5+2)+'rem';h.style.animationDuration=(Math.random()*3+5)+'s';hearts.appendChild(h);setTimeout(()=>h.remove(),10000);}
     setInterval(createHeart,500);
 
-    // === SLIDESHOW ===
+    // SLIDESHOW
     const slides=document.querySelectorAll('.slide');let current=0;setInterval(()=>{slides[current].classList.remove('active');current=(current+1)%slides.length;slides[current].classList.add('active');},4000);
     slides.forEach(s=>s.addEventListener('click',()=>{document.getElementById('modalImg').src=s.querySelector('img').src;document.getElementById('modal').style.display='flex';}));
     document.getElementById('close').addEventListener('click',()=>{document.getElementById('modal').style.display='none';});
 
-    // === CONTADORES ===
+    // CONTADORES
     function startCountdown(d,id,p=false){const t=new Date(d);function u(){const n=new Date();let next=t; if(!p&&n>t)next.setFullYear(next.getFullYear()+1);const diff=p?n-t:next-n;const days=Math.floor(diff/864e5),h=Math.floor(diff%864e5/36e5),m=Math.floor(diff%36e5/6e4),s=Math.floor(diff%6e4/1e3);document.getElementById(id).innerHTML=`${days}d ${h}h<br>${m}m ${s}s`;setTimeout(u,1000);}u();}
     startCountdown("2026-01-01T00:00:00","birthdayCountdown");
     startCountdown("2026-05-15T00:00:00","anniversaryCountdown");
     startCountdown("2023-05-15T00:00:00","togetherCountdown",true);
 
-    // === CARTA DIÁRIA (TODAS AS 200+ FRASES) ===
+    // CARTA DIÁRIA — TODAS AS FRASES
     const loveMessages = [
-      "Seu sorriso ilumina até os dias mais escuros.","Você é a razão do meu coração bater mais forte.","Te amo mais a cada segundo que passa.","Seu abraço é meu lugar favorito no mundo.","Você é meu sonho que se tornou realidade.","Seu olhar me faz esquecer do tempo.","Você é minha paz em meio ao caos.","Te amo além das palavras.","Você é meu para sempre.","Seu toque é magia pura.","Você é meu sol em dias nublados.","Seu cheiro me faz sentir em casa.","Você é a música da minha vida.","Te amo mais que chocolate.","Você é meu maior orgulho.","Seu beijo é meu vício.","Você é minha melhor versão.","Te amo até a lua e de volta.","Você é meu destino.","Seu riso é minha melodia.","Você é minha inspiração diária.","Te amo em silêncio e em gritos.","Você é meu lar.","Seu amor me cura.","Você é minha sorte grande.","Te amo com todos os meus átomos.","Você é meu refúgio.","Seu olhar é poesia.","Você é minha eternidade.","Te amo mais que ontem.","Você é meu motivo pra sorrir.","Seu abraço é meu escudo.","Você é minha alma gêmea.","Te amo em todas as línguas.","Você é meu céu estrelado.","Seu toque me acalma.","Você é meu presente.","Te amo sem fim.","Você é minha luz.","Seu sorriso é meu remédio.","Você é meu tudo.","Te amo com o coração inteiro.","Você é minha vida.","Seu beijo é meu paraíso.","Você é meu amor verdadeiro.","Te amo por ser você.","Você é minha felicidade.","Seu olhar me completa.","Você é meu mundo.","Te amo para sempre.","Você é meu coração batendo fora do peito.","Seu amor é meu ar.","Você é minha estrela guia.","Te amo mais que tudo.","Você é meu sonho acordado.","Seu sorriso é meu sol.","Você é minha paz.","Te amo com a alma.","Você é meu destino certo.","Seu toque é fogo.","Você é minha sorte.","Te amo além da razão.","Você é meu porto seguro.","Seu olhar é meu lar.","Você é meu amor eterno.","Te amo com cada batida.","Você é minha vida inteira.","Seu abraço é meu céu.","Você é meu futuro.","Te amo sem medidas.","Você é minha poesia.","Seu beijo é minha música.","Você é meu sempre.","Te amo com o universo inteiro.","Você é minha verdade.","Seu sorriso é minha força.","Você é meu amor real.","Te amo em todos os tempos.","Você é minha essência.","Seu toque é minha cura.","Você é meu começo e fim.","Te amo com cada fibra.","Você é minha luz no escuro.","Seu olhar é meu norte.","Você é meu amor infinito.","Te amo com o coração aberto.","Você é minha alma.","Seu abraço é meu mundo.","Você é meu para sempre.","Te amo além do infinito.","Você é minha estrela.","Seu sorriso é meu dia.","Você é meu amor puro.","Te amo com cada suspiro.","Você é minha razão.","Seu beijo é meu vício doce.","Você é meu amor maior.","Te amo com cada olhar.","Você é minha felicidade plena.","Seu toque é minha paz.","Você é meu amor verdadeiro.","Te amo com a vida.","Você é meu coração.","Seu sorriso é meu céu.","Você é meu amor eterno.","Te amo com tudo que sou.","Você é minha alma gêmea.","Seu abraço é meu lar.","Você é meu destino.","Te amo para sempre."
-      // (aqui estão todas as suas 200+ frases — pode confiar!)
+      "Seu sorriso ilumina até os dias mais escuros.","Você é a razão do meu coração bater mais forte.","Te amo mais a cada segundo que passa.","Seu abraço é meu lugar favorito no mundo.","Você é meu sonho que se tornou realidade.","Seu olhar me faz esquecer do tempo.","Você é minha paz em meio ao caos.","Te amo além das palavras.","Você é meu para sempre.","Seu toque é magia pura.","Você é meu sol em dias nublados.","Seu cheiro me faz sentir em casa.","Você é a música da minha vida.","Te amo mais que chocolate.","Você é meu maior orgulho.","Seu beijo é meu vício.","Você é minha melhor versão.","Te amo até a lua e de volta.","Você é meu destino.","Seu riso é minha melodia.","Você é minha inspiração diária.","Te amo em silêncio e em gritos.","Você é meu lar.","Seu amor me cura.","Você é minha sorte grande.","Te amo com todos os meus átomos.","Você é meu refúgio.","Seu olhar é poesia.","Você é minha eternidade.","Te amo mais que ontem.","Você é meu motivo pra sorrir.","Seu abraço é meu escudo.","Você é minha alma gêmea.","Te amo em todas as línguas.","Você é meu céu estrelado.","Seu toque me acalma.","Você é meu presente.","Te amo sem fim.","Você é minha luz.","Seu sorriso é meu remédio.","Você é meu tudo.","Te amo com o coração inteiro.","Você é minha vida.","Seu beijo é meu paraíso.","Você é meu amor verdadeiro.","Te amo por ser você.","Você é minha felicidade.","Seu olhar me completa.","Você é meu mundo.","Te amo para sempre.","Você é meu coração batendo fora do peito.","Seu amor é meu ar.","Você é minha estrela guia.","Te amo mais que tudo.","Você é meu sonho acordado.","Seu sorriso é meu sol.","Você é minha paz.","Te amo com a alma.","Você é meu destino certo.","Seu toque é fogo.","Você é minha sorte.","Te amo além da razão.","Você é meu porto seguro.","Seu olhar é meu lar.","Você é meu amor eterno.","Te amo com cada batida.","Você é minha vida inteira.","Seu abraço é meu céu.","Você é meu futuro.","Te amo sem medidas.","Você é minha poesia.","Seu beijo é minha música.","Você é meu sempre.","Te amo com o universo inteiro.","Você é minha verdade.","Seu sorriso é minha força.","Você é meu amor real.","Te amo em todos os tempos.","Você é minha essência.","Seu toque é minha cura.","Você é meu começo e fim.","Te amo com cada fibra.","Você é minha luz no escuro.","Seu olhar é meu norte.","Você é meu amor infinito.","Te amo com o coração aberto.","Você é minha alma.","Seu abraço é meu mundo.","Você é meu para sempre.","Te amo além do infinito.","Você é minha estrela.","Seu sorriso é meu dia.","Você é meu amor puro.","Te amo com cada suspiro.","Você é minha razão.","Seu beijo é meu vício doce.","Você é meu amor maior.","Te amo com cada olhar.","Você é minha felicidade plena.","Seu toque é minha paz.","Você é meu amor verdadeiro.","Te amo com a vida.","Você é meu coração.","Seu sorriso é meu céu.","Você é meu amor eterno.","Te amo com tudo que sou.","Você é minha alma gêmea.","Seu abraço é meu lar.","Você é meu destino.","Te amo para sempre.","Você é minha luz.","Seu olhar é meu tudo.","Você é meu amor real.","Te amo com o universo.","Você é minha estrela guia.","Seu toque é meu paraíso.","Você é meu amor infinito.","Te amo com cada batida.","Você é minha vida.","Seu sorriso é meu sol.","Você é meu para sempre.","Te amo além das palavras.","Você é meu coração.","Seu beijo é minha música.","Você é meu amor eterno.","Te amo com a alma.","Você é minha paz.","Seu olhar é poesia.","Você é meu tudo.","Te amo com cada suspiro.","Você é minha felicidade.","Seu abraço é meu escudo.","Você é meu amor verdadeiro.","Te amo com o coração inteiro.","Você é minha estrela.","Seu sorriso é meu remédio.","Você é meu mundo.","Te amo sem fim.","Você é minha luz.","Seu toque é magia.","Você é meu para sempre.","Te amo mais que tudo.","Você é minha sorte.","Seu beijo é meu vício.","Você é meu amor real.","Te amo com cada fibra.","Você é minha alma.","Seu olhar é meu lar.","Você é meu destino.","Te amo com a vida.","Você é meu coração batendo.","Seu sorriso é meu dia.","Você é meu amor puro.","Te amo com cada olhar.","Você é minha felicidade plena.","Seu toque é minha paz.","Você é meu amor maior.","Te amo com tudo que sou.","Você é minha estrela guia.","Seu abraço é meu céu.","Você é meu futuro.","Te amo sem medidas.","Você é minha poesia.","Seu beijo é minha música.","Você é meu sempre.","Te amo com o universo inteiro.","Você é minha verdade.","Seu sorriso é minha força.","Você é meu amor real.","Te amo em todos os tempos.","Você é minha essência.","Seu toque é minha cura.","Você é meu começo e fim.","Te amo com cada fibra.","Você é minha luz no escuro.","Seu olhar é meu norte.","Você é meu amor infinito.","Te amo com o coração aberto.","Você é minha alma.","Seu abraço é meu mundo.","Você é meu para sempre.","Te amo além do infinito.","Você é minha estrela.","Seu sorriso é meu dia.","Você é meu amor puro.","Te amo com cada suspiro.","Você é minha razão.","Seu beijo é meu vício doce.","Você é meu amor maior.","Te amo com cada olhar.","Você é minha felicidade plena.","Seu toque é minha paz.","Você é meu amor verdadeiro.","Te amo com a vida.","Você é meu coração.","Seu sorriso é meu céu.","Você é meu amor eterno.","Te amo com tudo que sou.","Você é minha alma gêmea.","Seu abraço é meu lar.","Você é meu destino.","Te amo para sempre."
     ];
 
     const letter=document.getElementById('dailyLetter');
@@ -219,14 +195,14 @@
     const today=new Date().getDate()+new Date().getMonth()*31;
     let shown=false;
     letter.addEventListener('click',()=>{
-      if(shown) return;
+      if(shown)return;
       message.textContent=loveMessages[today % loveMessages.length];
       message.style.display='block';
       letter.querySelector('strong').style.display='none';
       shown=true;
     });
 
-    // === TICKET GOMINHA ORIGINAL ===
+    // TICKET GOMINHA ORIGINAL
     const gominhaBox=document.getElementById('gominhaBox');
     const gominhaCountdown=document.getElementById('gominhaCountdown');
     const readyText=document.getElementById('readyText');
@@ -240,7 +216,7 @@
 
     document.getElementById('confettiBtn').addEventListener('click',()=>{confetti({particleCount:180,spread:80,origin:{y:0.6},colors:['#ff6b9d','#d63384','#9c27b0','#ff8a65']});});
 
-    // === MINI-GAME 100% FUNCIONANDO ===
+    // MINI-GAME — EMOJIS REAIS + TOQUE PERFEITO
     document.getElementById('btnMiniGame').onclick=()=>{document.getElementById('miniGameModal').style.display='flex';startMiniGame();};
     document.getElementById('closeGame').onclick=()=>{document.getElementById('miniGameModal').style.display='none';};
 
@@ -273,8 +249,8 @@
       }
 
       function update(){
-        score.innerHTML=`Salvos: ${salvos} Cat`;
-        vidas.innerHTML=`Vidas: ` + "Heart".repeat(lives);
+        score.innerHTML = `Salvos: ${salvos} 😻`;
+        vidas.innerHTML = `Vidas: ❤️`.repeat(lives);
       }
 
       function novoGato(){
@@ -288,7 +264,7 @@
         const num=Math.floor(Math.random()*13)+1;
         const leftPos=Math.random()*60+20;
 
-        // Hitbox bem menor (só no centro do gato)
+        // Hitbox menor (200px) e sem contorno
         gato.innerHTML = `<div style="width:200px;height:200px;background:url('img/gato${num}.png') center/contain no-repeat;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);"></div>`;
         gato.style.cssText=`
           position:absolute;
@@ -300,6 +276,7 @@
           z-index:5;
         `;
 
+        // só o centro do gato é clicável
         gato.querySelector('div').onclick = (e) => {
           e.stopPropagation();
           if(gato.dataset.clicado) return;
@@ -312,7 +289,7 @@
 
           for(let i=0;i<22;i++){
             const h=document.createElement('div');
-            h.innerHTML = 'Heart';
+            h.innerHTML = '❤️';
             h.style.cssText=`position:absolute;font-size:50px;left:${gato.offsetLeft+140}px;top:${gato.offsetTop+140}px;pointer-events:none;`;
             h.animate([{transform:'translateY(0)',opacity:1},{transform:'translateY(-400px) scale(0)',opacity:0}],{duration:1600}).onfinish=()=>h.remove();
             area.appendChild(h);
